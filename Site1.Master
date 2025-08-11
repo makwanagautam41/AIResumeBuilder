@@ -1,0 +1,48 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="airesumebuilder.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Intro Page</title>
+                    <link rel="stylesheet" href="css/index.css">
+                </head>
+                <body>
+                    <header class="navbar">
+                        <div class="logo">MyLogo</div>
+                        <nav class="nav-links">
+                            <a href="#">Login</a>
+                            <a href="#">Register</a>
+                        </nav>
+                    </header>
+
+                    <main class="intro-section">
+                        <div class="intro-content">
+                            <h1>Welcome to Our AIResumeBuilder Website</h1>
+                            <p>
+                                This is a simple introduction page inspired by ChatGPT’s clean and minimal design.
+        Everything is done using only HTML and CSS, fully responsive for all devices.
+                            </p>
+                        </div>
+                    </main>
+                </body>
+                </html>
+
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>

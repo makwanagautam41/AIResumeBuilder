@@ -1,0 +1,84 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace airesumebuilder
+{
+    public partial class Register : System.Web.UI.Page
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+        SqlConnection con;
+        SqlDataAdapter da;
+        DataSet ds;
+        SqlCommand cmd;
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            get_connection();
+        }
+
+        void get_connection()
+        {
+            con = new SqlConnection(connectionString);
+            con.Open();
+        }
+
+        int check_user_exist(String email, String mobile)
+        {
+            get_connection();
+            String query = "SELECT COUNT(*) FROM user_tbl WHERE Email = '" + email + "' OR Mobile = '" + mobile + "'";
+            cmd = new SqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@Email", email);
+            cmd.Parameters.AddWithValue("@Mobile", mobile);
+            int count = (int)cmd.ExecuteScalar();
+            if (count > 0)
+            {
+                LabelMessage.Text = "User with this email or mobile already exists.";
+                LabelMessage.ForeColor = System.Drawing.Color.Red;
+                con.Close();
+                return 1; // User exists
+            }
+            con.Close();
+            return 0; // User does not exist
+        }
+
+        protected void ButtonRegister_Click(object sender, EventArgs e)
+        {
+            String name = TextBoxName.Text;
+            String email = TextBoxEmail.Text;
+            String mobile = TextBoxMobile.Text;
+            String password = TextBoxPassword.Text;
+
+
+            if (check_user_exist(email, mobile) == 1)
+            {
+                return;
+            }
+
+            get_connection();
+            String query = "INSERT INTO user_tbl(Name, Email, Mobile, Password) VALUES ('" + name + "','" + email + "','" + mobile + "','" + password + "')";
+            cmd = new SqlCommand(query, con);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                Session["successMessage"] = "Registration successfull!";
+                Response.Redirect("Login.aspx");
+            }
+            catch (Exception ex)
+            {
+                LabelMessage.Text = "Error: " + ex.Message;
+                LabelMessage.ForeColor = System.Drawing.Color.Red;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+    }
+}
