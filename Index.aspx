@@ -1,33 +1,25 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="airesumebuilder.Index" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" runat="server" contentplaceholderid="ContentPlaceHolder1">
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Intro Page</title>
-                    <link rel="stylesheet" href="css/index.css">
-                </head>
-                <body>
-                    <header class="navbar">
-                        <div class="logo">
-                            MyLogo</div>
-                        <nav class="nav-links">
-                            <a href="Login.aspx">Login</a> <a href="Register.aspx">Register</a>
-                        </nav>
-                    </header>
-                    <main class="intro-section">
-                    <div class="intro-content">
-                        <h1>Welcome to Our AIResumeBuilder Website</h1>
-                         <a href="Home.aspx">Get Started</a>
-                        <p>
-                            This is a simple introduction page inspired by ChatGPT’s clean and minimal design.
-        Everything is done using only HTML and CSS, fully responsive for all devices.
-                        </p>
-                    </div>
-                    </main>
-                </body>
-    </html>
+    <link rel="stylesheet" href="css/index.css" />
 </asp:Content>
 
+<asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
+    <header class="navbar">
+        <div class="logo">AIResumeBuilder</div>
+        <nav class="nav-links">
+            <a href="Login.aspx">Login</a>
+            <a href="Register.aspx">Register</a>
+        </nav>
+    </header>
+
+    <main class="intro-section">
+        <div class="intro-content">
+            <h1>Welcome to Our AI Resume Builder</h1>
+            <p>
+                Create professional resumes in minutes using AI-powered templates. 
+                Choose from modern, classic, or creative designs — optimized for all devices.
+            </p>
+            <a class="cta-btn" href="Home.aspx">Get Started</a>
+        </div>
+    </main>
+</asp:Content>

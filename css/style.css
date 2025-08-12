@@ -70,6 +70,19 @@ body {
   padding-bottom: 12px;
   border-bottom: 1px solid var(--sidebar-border);
 }
+.sidebar-header .img-div a{
+    text-decoration:none;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    color:#394257;
+}
+.sidebar-header .img-div img{
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    border-radius: 50%;
+}
 .new-chat-btn {
   margin: 12px 0;
   border: none;
@@ -324,7 +337,7 @@ body {
   background: var(--bubble-user);
 }
 /* Typing indicator */
-.typing {
+/*.typing {
   display: flex;
   gap: 4px;
 }
@@ -344,7 +357,7 @@ body {
 @keyframes blink {
   50% {
     opacity: 0.3;
-  }
+  }*/
 }
 
 /* ------- Composer ------- */

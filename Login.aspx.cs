@@ -14,7 +14,6 @@ namespace airesumebuilder
         string connectionString = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
         SqlConnection con;
         SqlCommand cmd;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["successMessage"] != null)
@@ -33,17 +32,18 @@ namespace airesumebuilder
         int check_user_exist(string email)
         {
             get_connection();
-            string query = "SELECT COUNT(*) FROM user_tbl WHERE Email = @Email";
-            cmd = new SqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@Email", email);
-            int count = (int)cmd.ExecuteScalar();
-            con.Close();
+
+            string sql = "SELECT COUNT(*) FROM user_tbl WHERE Email = '" + email + "'";
+            SqlCommand cmd = new SqlCommand(sql, con);
+
+            int count = Convert.ToInt32(cmd.ExecuteScalar());
 
             if (count > 0)
             {
-                return 1; // User exists
+                return 1;
             }
-            return 0; // User does not exist
+            con.Close();
+            return 0;
         }
 
         protected void ButtonLogin_Click(object sender, EventArgs e)
@@ -67,28 +67,20 @@ namespace airesumebuilder
 
             try
             {
-                using (con = new SqlConnection(connectionString))
-                {
-                    string query = "SELECT COUNT(*) FROM user_tbl WHERE Email = @Email AND Password = @Password";
-                    using (cmd = new SqlCommand(query, con))
-                    {
-                        cmd.Parameters.AddWithValue("@Email", email);
-                        cmd.Parameters.AddWithValue("@Password", password);
-                        con.Open();
-                        int userCount = (int)cmd.ExecuteScalar();
+                get_connection();
+                string query = "SELECT COUNT(*) FROM user_tbl WHERE Email = '" + email + "' AND Password = '" + password + "'";
+                cmd = new SqlCommand(query, con);
 
-                        if (userCount > 0)
-                        {
-                            Session["userLoggedIn"] = "true";
-                            Session["userEmail"] = email;
-                            Response.Redirect("Home.aspx");
-                        }
-                        else
-                        {
-                            LabelMessage.Text = "Invalid password.";
-                            LabelMessage.ForeColor = System.Drawing.Color.Red;
-                        }
-                    }
+                if ((int)cmd.ExecuteScalar() > 0)
+                {
+                    Session["userLoggedIn"] = "true";
+                    Session["userEmail"] = email;
+                    Response.Redirect("Home.aspx");
+                }
+                else
+                {
+                    LabelMessage.Text = "Invalid password.";
+                    LabelMessage.ForeColor = System.Drawing.Color.Red;
                 }
             }
             catch (Exception ex)
@@ -96,6 +88,11 @@ namespace airesumebuilder
                 LabelMessage.Text = "Error: " + ex.Message;
                 LabelMessage.ForeColor = System.Drawing.Color.Red;
             }
+            finally
+            {
+                con.Close();
+            }
+
         }
     }
 }

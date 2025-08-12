@@ -7,14 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace airesumebuilder
 {
-    public partial class Home1 : System.Web.UI.Page
+    public partial class Profile : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["userLoggedIn"] != "true")
-            {
-                Response.Redirect("Login.aspx");
-            }
+
         }
     }
 }

@@ -29,23 +29,24 @@ namespace airesumebuilder
             con.Open();
         }
 
-        int check_user_exist(String email, String mobile)
+        int check_user_exist(string email, string mobile)
         {
             get_connection();
-            String query = "SELECT COUNT(*) FROM user_tbl WHERE Email = '" + email + "' OR Mobile = '" + mobile + "'";
-            cmd = new SqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@Email", email);
-            cmd.Parameters.AddWithValue("@Mobile", mobile);
-            int count = (int)cmd.ExecuteScalar();
+
+            string sql = "SELECT COUNT(*) FROM user_tbl WHERE Email = '" + email + "' OR Mobile = '" + mobile + "'";
+            SqlCommand cmd = new SqlCommand(sql, con);
+
+            int count = Convert.ToInt32(cmd.ExecuteScalar());
+
             if (count > 0)
             {
-                LabelMessage.Text = "User with this email or mobile already exists.";
+                LabelMessage.Text = "User already exists!";
                 LabelMessage.ForeColor = System.Drawing.Color.Red;
                 con.Close();
-                return 1; // User exists
+                return 1;
             }
             con.Close();
-            return 0; // User does not exist
+            return 0;
         }
 
         protected void ButtonRegister_Click(object sender, EventArgs e)
