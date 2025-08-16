@@ -109,8 +109,8 @@
                         <button aria-label="Send message">
                             ➤
                         </button>--%>
-                        <asp:TextBox ID="message" runat="server" style="width:100%;padding:8px; border-radius:5px;" placeholder="Type a message..."></asp:TextBox>
-                        <asp:Button ID="Submit" runat="server" style="padding:7px; border-radius:5px;cursor:pointer;" Text="Send message" />
+                        <asp:TextBox ID="txtMessageBox" runat="server" Style="width: 100%; padding: 8px; border-radius: 5px;" placeholder="Type a message..."></asp:TextBox>
+                        <asp:Button ID="Submit" runat="server" Style="padding: 7px; border-radius: 5px; cursor: pointer;" Text="Send message" OnClick="Submit_Click" />
                     </div>
                 </div>
             </main>

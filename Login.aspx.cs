@@ -22,6 +22,11 @@ namespace airesumebuilder
                 LabelMessage.ForeColor = System.Drawing.Color.Green;
                 Session["successMessage"] = null;
             }
+
+            if (Session["userLoggedIn"] == "true")
+            {
+                Response.Redirect("Home.aspx");
+            }
         }
         void get_connection()
         {

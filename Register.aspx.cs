@@ -17,10 +17,15 @@ namespace airesumebuilder
         SqlDataAdapter da;
         DataSet ds;
         SqlCommand cmd;
+        String img_file_name;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             get_connection();
+            if (Session["userLoggedIn"] == "true")
+            {
+                Response.Redirect("Home.aspx");
+            }
         }
 
         void get_connection()
@@ -49,6 +54,15 @@ namespace airesumebuilder
             return 0;
         }
 
+        void img_upload()
+        {
+            if (ImageFile.HasFile)
+            {
+                img_file_name = "images/" + ImageFile.FileName;
+                ImageFile.SaveAs(Server.MapPath(img_file_name));
+            }
+        }
+
         protected void ButtonRegister_Click(object sender, EventArgs e)
         {
             String name = TextBoxName.Text;
@@ -56,14 +70,14 @@ namespace airesumebuilder
             String mobile = TextBoxMobile.Text;
             String password = TextBoxPassword.Text;
 
-
             if (check_user_exist(email, mobile) == 1)
             {
                 return;
             }
 
             get_connection();
-            String query = "INSERT INTO user_tbl(Name, Email, Mobile, Password) VALUES ('" + name + "','" + email + "','" + mobile + "','" + password + "')";
+            img_upload();
+            String query = "INSERT INTO user_tbl(Name, Email, Mobile, Password,Image,Gender) VALUES ('" + name + "','" + email + "','" + mobile + "','" + password + "','"+img_file_name+"','"+genderRadioButton.Text+"')";
             cmd = new SqlCommand(query, con);
             try
             {

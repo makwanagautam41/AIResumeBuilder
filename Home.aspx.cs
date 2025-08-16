@@ -16,5 +16,10 @@ namespace airesumebuilder
                 Response.Redirect("Login.aspx");
             }
         }
+
+        protected void Submit_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

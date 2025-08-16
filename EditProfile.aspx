@@ -1,19 +1,24 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="airesumebuilder.Register" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditProfile.aspx.cs" Inherits="airesumebuilder.EditProfile" %>
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Register</title>
+    <title>Edit Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <form id="register" runat="server" class="w-full max-w-md bg-white/90 rounded-xl shadow-lg p-8">
-        <h2 class="text-3xl font-bold text-center mb-6 text-blue-900">Create Account</h2>
-        <%--<asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="text-red-600 mb-4" />--%>
+<body class="min-h-screen flex items-center justify-center">
+    <form id="form1" runat="server" class="w-full max-w-md bg-white/90 rounded-xl shadow-lg p-8">
+        <h2 class="text-3xl font-bold text-center mb-6 text-blue-900">Edit Profile</h2>
+
         <p cssclass="mb-4">
             <asp:Label ID="LabelMessage" runat="server"></asp:Label>
         </p>
+
+        <div class="mb-4">
+            <asp:Label ID="UserId" runat="server" CssClass="block text-blue-900 font-semibold mb-2"></asp:Label>
+            <asp:TextBox ID="TextBoxId" runat="server" Enabled="false" CssClass="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-900 transition"></asp:TextBox>
+        </div>
 
         <div class="mb-4">
             <asp:Label ID="LabelName" runat="server" AssociatedControlID="TextBoxName" CssClass="block text-blue-900 font-semibold mb-2" Text="Name"></asp:Label>
@@ -41,37 +46,17 @@
         </div>
 
         <div class="mb-6">
-            <asp:Label ID="LabelPassword" runat="server" AssociatedControlID="TextBoxPassword" CssClass="block text-blue-900 font-semibold mb-2" Text="Password"></asp:Label>
-            <asp:TextBox ID="TextBoxPassword" runat="server" CssClass="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-900 transition"
-                TextMode="Password" placeholder="Choose a password"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidatorPassword" runat="server" ControlToValidate="TextBoxPassword" ErrorMessage="Password is required." CssClass="text-red-600" Display="Dynamic" />
-        </div>
-
-        <div class="mb-6">
-            <asp:Label ID="LabelImage" runat="server" CssClass="block text-blue-900 font-semibold mb-2"></asp:Label>
-            <asp:FileUpload ID="ImageFile" runat="server" />
-        </div>
-
-        <div class="mb-6">
-            <asp:Label ID="Gender" runat="server" CssClass="block text-blue-900 font-semibold mb-2" Text="Gender"></asp:Label>
-            <asp:RadioButtonList ID="genderRadioButton" runat="server" RepeatDirection="Horizontal" CssClass="block text-blue-900 font-semibold mb-2">
+            <asp:Label ID="GenderLabel" runat="server" CssClass="block text-blue-900 font-semibold mb-2" Text="Gender"></asp:Label>
+            <asp:RadioButtonList ID="GenderRadioButton" runat="server" RepeatDirection="Horizontal" CssClass="space-x-4 text-blue-900 font-medium">
                 <asp:ListItem>Male</asp:ListItem>
                 <asp:ListItem>Female</asp:ListItem>
             </asp:RadioButtonList>
         </div>
 
-        <%--<asp:DropDownList ID="CityDropDownList" runat="server" CssClass="block text-blue-900 font-semibold mb-2">
-            <asp:ListItem>---Select City---</asp:ListItem>
-            <asp:ListItem>Chotila</asp:ListItem>
-            <asp:ListItem>Rajkot</asp:ListItem>
-            <asp:ListItem>Surat</asp:ListItem>
-        </asp:DropDownList>--%>
-
-        <asp:Button ID="ButtonRegister" runat="server" Text="Register" CssClass="w-full bg-blue-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition" OnClick="ButtonRegister_Click" />
+        <asp:Button ID="ButtonUpdate" runat="server" Text="Update Profile" CssClass="w-full bg-blue-900 hover:bg-blue-800 cursor-pointer text-white font-bold py-2 px-4 rounded-lg transition" OnClick="ButtonUpdate_Click" />
 
         <p class="mt-4 text-center text-gray-700">
-            Already have an account? 
-        <a href="Login.aspx" class="text-blue-900 underline">Login</a>
+            <a href="Profile.aspx" class="text-blue-900 underline">Back to Profile</a>
         </p>
     </form>
 </body>
