@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="airesumebuilder.Home1" Async="true" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="ChatPlayGround.aspx.cs" Inherits="airesumebuilder.ChatPlayGround" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -102,15 +102,15 @@
                     </div>
                     <div class="composer">
                         <%--<textarea
-                            rows="1"
-                            placeholder="Type a message..."
-                            aria-label="Message"
-                            >Static chat UI. No input.</textarea>
-                        <button aria-label="Send message">
-                            ➤
-                        </button>--%>
+                        rows="1"
+                        placeholder="Type a message..."
+                        aria-label="Message"
+                        >Static chat UI. No input.</textarea>
+                    <button aria-label="Send message">
+                        ➤
+                    </button>--%>
                         <asp:TextBox ID="txtMessageBox" runat="server" Style="width: 100%; padding: 8px; border-radius: 5px;" placeholder="Type a message..."></asp:TextBox>
-                        <asp:Button ID="Submit" runat="server" Style="padding: 7px; border-radius: 5px; cursor: pointer;" Text="Send message" OnClick="Submit_Click" />
+                        <asp:Button ID="Submit" runat="server" Style="padding: 7px; border-radius: 5px; cursor: pointer;" Text="Send message" />
                     </div>
                 </div>
             </main>
