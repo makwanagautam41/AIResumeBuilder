@@ -25,16 +25,17 @@
                     </div>
                     <span class="logo-text">MyChat</span>
                 </div>
-                <button class="new-chat-btn">
-                    + New Chat
-                </button>
+                <asp:Button ID="Button1" runat="server" Text="+ New Chat" class="new-chat-btn" OnClick="Button1_Click"/>
                 <div class="chat-list">
-                    <button class="active">
-                        New Chat
-                    </button>
-                    <button>
-                        Project Chat
-                    </button>
+                    <asp:Repeater ID="ChatRepeater" runat="server">
+                        <ItemTemplate>
+                            <p>
+                                <a href='<%# "ChatPlayGround.aspx?chatid=" + Eval("ChatId") %>'>
+                                    <%# Eval("Title") %>
+                                </a>
+                            </p>
+                        </ItemTemplate>
+                    </asp:Repeater>
                 </div>
                 <div class="sidebar-footer">
                     <span>Upgrade</span>
