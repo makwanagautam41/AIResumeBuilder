@@ -25,15 +25,20 @@
                     </div>
                     <span class="logo-text">MyChat</span>
                 </div>
-                <asp:Button ID="Button1" runat="server" Text="+ New Chat" class="new-chat-btn" OnClick="Button1_Click"/>
+                <asp:Button ID="Button1" runat="server" Text="+ New Chat" class="new-chat-btn" OnClick="Button1_Click" />
                 <div class="chat-list">
-                    <asp:Repeater ID="ChatRepeater" runat="server">
+                    <asp:Repeater ID="ChatRepeater" runat="server" OnItemCommand="ChatRepeater_ItemCommand">
                         <ItemTemplate>
-                            <p>
-                                <a href='<%# "ChatPlayGround.aspx?chatid=" + Eval("ChatId") %>'>
-                                    <%# Eval("Title") %>
-                                </a>
-                            </p>
+                            <div style="display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 4px;">
+                                <p style="margin: 0;">
+                                    <a href='<%# "ChatPlayGround.aspx?chatid=" + Eval("ChatId") %>'>
+                                        <%# Eval("Title") %>
+                                    </a>
+                                </p>
+                                <asp:Button ID="DeleteBtn" runat="server"
+                                    Style="padding: 4px; border-radius: 5px; height: 30px; cursor: pointer;"
+                                    Text="Delete" CommandName="DeleteChat" CommandArgument='<%# Eval("ChatId") %>' />
+                            </div>
                         </ItemTemplate>
                     </asp:Repeater>
                 </div>
@@ -102,14 +107,6 @@
                         </div>
                     </div>
                     <div class="composer">
-                        <%--<textarea
-                            rows="1"
-                            placeholder="Type a message..."
-                            aria-label="Message"
-                            >Static chat UI. No input.</textarea>
-                        <button aria-label="Send message">
-                            ➤
-                        </button>--%>
                         <asp:TextBox ID="txtMessageBox" runat="server" Style="width: 100%; padding: 8px; border-radius: 5px;" placeholder="Type a message..."></asp:TextBox>
                         <asp:Button ID="Submit" runat="server" Style="padding: 7px; border-radius: 5px; cursor: pointer;" Text="Send message" OnClick="Submit_Click" />
                     </div>

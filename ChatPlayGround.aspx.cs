@@ -120,5 +120,28 @@ namespace airesumebuilder
         {
             Response.Redirect("Home.aspx");
         }
+
+        protected void ChatRepeater_ItemCommand(object source, System.Web.UI.WebControls.RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "DeleteChat")
+            {
+                int chatId = Convert.ToInt32(e.CommandArgument);
+                get_connection();
+
+                // First delete messages of this chat
+                string deleteMessages = "DELETE FROM chat_messages WHERE ChatId='"+chatId+"'";
+                SqlCommand cmd1 = new SqlCommand(deleteMessages, con);
+                cmd1.ExecuteNonQuery();
+
+                // Then delete the chat session
+                string deleteSession = "DELETE FROM chat_sessions WHERE ChatId='"+chatId+"'";
+                SqlCommand cmd2 = new SqlCommand(deleteSession, con);
+                cmd2.ExecuteNonQuery();
+
+                con.Close();
+
+                LoadChatSessions();
+            }
+        }
     }
 }

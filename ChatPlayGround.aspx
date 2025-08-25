@@ -23,13 +23,18 @@
             </div>
             <asp:Button ID="Button1" runat="server" Text="+ New Chat" class="new-chat-btn" OnClick="Button1_Click" />
             <div class="chat-list">
-                <asp:Repeater ID="ChatRepeater" runat="server">
+                <asp:Repeater ID="ChatRepeater" runat="server" OnItemCommand="ChatRepeater_ItemCommand">
                     <ItemTemplate>
-                        <p>
-                            <a href='<%# "ChatPlayGround.aspx?chatid=" + Eval("ChatId") %>'>
-                                <%# Eval("Title") %>
-                            </a>
-                        </p>
+                        <div style="display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 4px;">
+                            <p style="margin: 0;">
+                                <a href='<%# "ChatPlayGround.aspx?chatid=" + Eval("ChatId") %>'>
+                                    <%# Eval("Title") %>
+                                </a>
+                            </p>
+                            <asp:Button ID="DeleteBtn" runat="server"
+                                Style="padding: 4px; border-radius: 5px; height: 30px; cursor: pointer;"
+                                Text="Delete" CommandName="DeleteChat" CommandArgument='<%# Eval("ChatId") %>' />
+                        </div>
                     </ItemTemplate>
                 </asp:Repeater>
             </div>
