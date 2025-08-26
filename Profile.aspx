@@ -26,6 +26,8 @@
                             <th class="px-4 py-3 text-left text-xs sm:text-sm font-semibold text-blue-900 uppercase tracking-wider">Email</th>
                             <th class="px-4 py-3 text-left text-xs sm:text-sm font-semibold text-blue-900 uppercase tracking-wider">Mobile</th>
                             <th class="px-4 py-3 text-left text-xs sm:text-sm font-semibold text-blue-900 uppercase tracking-wider">Gender</th>
+                            <th class="px-4 py-3 text-left text-xs sm:text-sm font-semibold text-blue-900 uppercase tracking-wider">Mobile</th>
+                            <th class="px-4 py-3 text-left text-xs sm:text-sm font-semibold text-blue-900 uppercase tracking-wider">Gender</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-100">
