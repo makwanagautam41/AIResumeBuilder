@@ -21,7 +21,7 @@
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-100">
                         <tr>
-                            <th class="px-4 py-3 text-left text-xs sm:text-sm font-semibold text-blue-900 uppercase tracking-wider">Id</th>
+                            <th class="px-4 py-3 text-left sm:text-sm font-semibold text-blue-900 uppercase tracking-wider">Id</th>
                             <th class="px-4 py-3 text-left text-xs sm:text-sm font-semibold text-blue-900 uppercase tracking-wider">Name</th>
                             <th class="px-4 py-3 text-left text-xs sm:text-sm font-semibold text-blue-900 uppercase tracking-wider">Email</th>
                             <th class="px-4 py-3 text-left text-xs sm:text-sm font-semibold text-blue-900 uppercase tracking-wider">Mobile</th>
