@@ -10,8 +10,8 @@
   --font-size: 15px;
   --line-height: 1.5;
   --overlay-bg: rgba(0, 0, 0, 0.18);
-}
-
+};
+;
 #theme-toggle-checkbox:checked ~ .container {
   --bg-color: #1e1e1e;
   --text-color: #eaeaea;
