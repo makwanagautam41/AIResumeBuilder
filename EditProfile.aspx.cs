@@ -16,6 +16,12 @@ namespace airesumebuilder
         SqlConnection con;
         SqlCommand cmd;
 
+
+
+
+
+
+
         void get_connection()
         {
             con = new SqlConnection(connectionString);
