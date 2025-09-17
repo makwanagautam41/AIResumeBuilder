@@ -116,6 +116,7 @@
     <Content Include="Login.aspx" />
     <Content Include="Profile.aspx" />
     <Content Include="Register.aspx" />
+    <Content Include="ResumeBuilder.aspx" />
     <Content Include="temp.aspx" />
     <Content Include="web-images\login-bg.jpg" />
     <Content Include="Web.config" />
@@ -178,6 +179,13 @@
     </Compile>
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ResumeBuilder.aspx.cs">
+      <DependentUpon>ResumeBuilder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ResumeBuilder.aspx.designer.cs">
+      <DependentUpon>ResumeBuilder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site1.Master.cs">
       <DependentUpon>Site1.Master</DependentUpon>
