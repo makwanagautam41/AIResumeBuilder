@@ -51,80 +51,83 @@ namespace airesumebuilder
             return 0;
         }
 
-        //protected void ButtonLogin_Click(object sender, EventArgs e)
-        //{
-        //    string email = TextBoxEmail.Text.Trim();
-        //    string password = TextBoxPassword.Text.Trim();
-
-        //    if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
-        //    {
-        //        LabelMessage.Text = "Please enter both email and password.";
-        //        LabelMessage.ForeColor = System.Drawing.Color.Red;
-        //        return;
-        //    }
-
-        //    if (check_user_exist(email) == 0)
-        //    {
-        //        LabelMessage.Text = "User with this email does not exist.";
-        //        LabelMessage.ForeColor = System.Drawing.Color.Red;
-        //        return;
-        //    }
-
-        //    try
-        //    {
-        //        get_connection();
-        //        string query = "SELECT COUNT(*) FROM user_tbl WHERE Email = '" + email + "' AND Password = '" + password + "'";
-        //        cmd = new SqlCommand(query, con);
-
-        //        if ((int)cmd.ExecuteScalar() > 0)
-        //        {
-        //            Session["userLoggedIn"] = "true";
-        //            Session["userEmail"] = email;
-        //            Response.Redirect("Home.aspx");
-        //        }
-        //        else
-        //        {
-        //            LabelMessage.Text = "Invalid password.";
-        //            LabelMessage.ForeColor = System.Drawing.Color.Red;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        LabelMessage.Text = "Error: " + ex.Message;
-        //        LabelMessage.ForeColor = System.Drawing.Color.Red;
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //    }
-        //}
-
         protected void ButtonLogin_Click(object sender, EventArgs e)
         {
-            get_connection();
             string email = TextBoxEmail.Text.Trim();
             string password = TextBoxPassword.Text.Trim();
 
-            string query = "select count(*) from user_tbl where Email='" + email + "' and Password='" + password + "'";
-            cmd = new SqlCommand(query, con);
-            int count = (int)cmd.ExecuteScalar();
-
-            if (count > 0)
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
-                Session["userLoggedIn"] = "true";
-                Session["userEmail"] = email;
-
-                string idQuery = "select Id from user_tbl where Email='" + email + "' and Password='" + password + "'";
-                cmd = new SqlCommand(idQuery, con);
-                Session["UserId"] = Convert.ToInt32(cmd.ExecuteScalar());
-
-                Response.Redirect("Home.aspx");
+                LabelMessage.Text = "Please enter both email and password.";
+                LabelMessage.ForeColor = System.Drawing.Color.Red;
+                return;
             }
-            else
+
+            if (check_user_exist(email) == 0)
             {
-                LabelMessage.Text = "Invalid password.";
+                LabelMessage.Text = "User with this email does not exist.";
+                LabelMessage.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+
+            try
+            {
+                get_connection();
+                string query = "SELECT COUNT(*) FROM user_tbl WHERE Email = '" + email + "' AND Password = '" + password + "'";
+                cmd = new SqlCommand(query, con);
+
+                if ((int)cmd.ExecuteScalar() > 0)
+                {
+                    Session["userLoggedIn"] = "true";
+                    Session["userEmail"] = email;
+                    string idQuery = "select Id from user_tbl where Email='" + email + "' and Password='" + password + "'";
+                    cmd = new SqlCommand(idQuery, con);
+                    Session["UserId"] = Convert.ToInt32(cmd.ExecuteScalar());
+                    Response.Redirect("Home.aspx");
+                }
+                else
+                {
+                    LabelMessage.Text = "Invalid password.";
+                    LabelMessage.ForeColor = System.Drawing.Color.Red;
+                }
+            }
+            catch (Exception ex)
+            {
+                LabelMessage.Text = "Error: " + ex.Message;
                 LabelMessage.ForeColor = System.Drawing.Color.Red;
             }
+            finally
+            {
+                con.Close();
+            }
         }
+
+        //protected void ButtonLogin_Click(object sender, EventArgs e)
+        //{
+        //    get_connection();
+        //    string email = TextBoxEmail.Text.Trim();
+        //    string password = TextBoxPassword.Text.Trim();
+
+        //    string query = "select count(*) from user_tbl where Email='" + email + "' and Password='" + password + "'";
+        //    cmd = new SqlCommand(query, con);
+        //    int count = (int)cmd.ExecuteScalar();
+
+        //    if (count > 0)
+        //    {
+        //        Session["userLoggedIn"] = "true";
+        //        Session["userEmail"] = email;
+
+        //        string idQuery = "select Id from user_tbl where Email='" + email + "' and Password='" + password + "'";
+        //        cmd = new SqlCommand(idQuery, con);
+        //        Session["UserId"] = Convert.ToInt32(cmd.ExecuteScalar());
+
+        //        Response.Redirect("Home.aspx");
+        //    }
+        //    else
+        //    {
+        //        LabelMessage.Text = "Invalid password.";
+        //        LabelMessage.ForeColor = System.Drawing.Color.Red;
+        //    }
+        //}
     }
 }

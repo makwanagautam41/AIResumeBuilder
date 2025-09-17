@@ -22,11 +22,10 @@
                 <span class="logo-text">MyChat</span>
             </div>
             <asp:Button ID="Button1" runat="server" Text="+ New Chat" class="new-chat-btn" OnClick="Button1_Click" />
-             <asp:Button ID="Button2" runat="server" Text="+ New Chat" class="new-chat-btn" OnClick="Button1_Click" />
             <div class="chat-list">
                 <asp:Repeater ID="ChatRepeater" runat="server" OnItemCommand="ChatRepeater_ItemCommand">
                     <ItemTemplate>
-                        <div class="new-chat-btn" style="display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 4px;">
+                        <div class="new-chat-btn" style="display: flex;background-color:#2f2f2f; justify-content: center; align-items: center; gap: 12px; margin-bottom: 4px;">
                             <p style="margin: 0;">
                                 <a style="text-decoration:none; color:white;" href='<%# "ChatPlayGround.aspx?chatid=" + Eval("ChatId") %>'>
                                     <%# Eval("Title") %>

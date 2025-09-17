@@ -33,6 +33,15 @@ namespace airesumebuilder
         protected global::System.Web.UI.WebControls.Repeater ChatRepeater;
 
         /// <summary>
+        /// userAvatar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label userAvatar;
+
+        /// <summary>
         /// txtMessageBox control.
         /// </summary>
         /// <remarks>

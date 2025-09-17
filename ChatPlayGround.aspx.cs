@@ -14,6 +14,7 @@ namespace airesumebuilder
         SqlConnection con;
         int chatId;
         int userId;
+        string userEmail;
 
         void get_connection()
         {
@@ -34,6 +35,7 @@ namespace airesumebuilder
             }
 
             userId = Convert.ToInt32(Session["UserId"]);
+            userEmail = Session["userEmail"].ToString();
 
             if (!IsPostBack)
             {
@@ -42,17 +44,16 @@ namespace airesumebuilder
             }
         }
 
-        protected async void Submit_Click(object sender, EventArgs e)
+        protected void Submit_Click(object sender, EventArgs e)
         {
             string userInput = txtMessageBox.Text.Trim();
             if (!string.IsNullOrEmpty(userInput))
             {
-                string response = await Home1Helper.CallGemini(userInput);
+                string response = Gemini_Class.CallGemini(userInput);
                 if (string.IsNullOrEmpty(response) || response.StartsWith("Error:"))
                 {
                     response = "Something went wrong or no response from Gemini.";
                 }
-
                 SaveMessage(chatId, userId, userInput, response);
                 LoadMessages();
                 txtMessageBox.Text = "";
@@ -75,11 +76,11 @@ namespace airesumebuilder
 
                 sb.Append($@"
                         <div class='message user'>
-                            <div class='avatar'>U</div>
+                            <div class='avatar'>{userEmail[0].ToString()}</div>
                             <div class='bubble'>{userMsg}</div>
                         </div>
                         <div class='message assistant'>
-                            <div class='avatar'>A</div>
+                            <div class='avatar'>AI</div>
                             <div class='bubble'>{aiMsg}</div>
                         </div>");
             }

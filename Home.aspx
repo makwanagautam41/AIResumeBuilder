@@ -29,7 +29,7 @@
                 <div class="chat-list">
                     <asp:Repeater ID="ChatRepeater" runat="server" OnItemCommand="ChatRepeater_ItemCommand">
                         <ItemTemplate>
-                            <div class="new-chat-btn" style="display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 4px;">
+                            <div class="new-chat-btn" style="display: flex;background-color:#2f2f2f; justify-content: center; align-items: center; gap: 12px; margin-bottom: 4px;">
                                 <p style="margin: 0;">
                                     <a style="text-decoration:none;color:white;" href='<%# "ChatPlayGround.aspx?chatid=" + Eval("ChatId") %>'>
                                         <%# Eval("Title") %>
@@ -91,7 +91,7 @@
                     <div class="chat-feed">
                         <div class="message user">
                             <div class="avatar">
-                                U
+                                <asp:Label ID="userAvatar" runat="server" Text="U"></asp:Label>
                             </div>
                             <div class="bubble">
                                 Hello! How are you?
@@ -99,7 +99,7 @@
                         </div>
                         <div class="message assistant">
                             <div class="avatar">
-                                A
+                                AI
                             </div>
                             <div class="bubble">
                                 I'm good! How can I help you today?
