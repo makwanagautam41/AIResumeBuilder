@@ -116,6 +116,7 @@
     <Content Include="Login.aspx" />
     <Content Include="Profile.aspx" />
     <Content Include="Register.aspx" />
+    <Content Include="css\resume-style.css" />
     <Content Include="ResumeBuilder.aspx" />
     <Content Include="temp.aspx" />
     <Content Include="web-images\login-bg.jpg" />
