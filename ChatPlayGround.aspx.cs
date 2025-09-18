@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI;
+using Markdig;
 
 namespace airesumebuilder
 {
@@ -49,7 +50,12 @@ namespace airesumebuilder
             string userInput = txtMessageBox.Text.Trim();
             if (!string.IsNullOrEmpty(userInput))
             {
-                string response = Gemini_Class.CallGemini(userInput);
+                string conversationHistory = GetConversationHistory(chatId);
+
+                string fullPrompt = conversationHistory + "\nUser: " + userInput + "\nAI:";
+
+                string response = Gemini_Class.CallGemini(fullPrompt);
+
                 if (string.IsNullOrEmpty(response) || response.StartsWith("Error:"))
                 {
                     response = "Something went wrong or no response from Gemini.";
@@ -60,7 +66,7 @@ namespace airesumebuilder
             }
         }
 
-        private void LoadMessages()
+        private string GetConversationHistory(int chatId)
         {
             get_connection();
             StringBuilder sb = new StringBuilder();
@@ -71,18 +77,78 @@ namespace airesumebuilder
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
+                sb.AppendLine("User: " + dr["Prompt"].ToString());
+                sb.AppendLine("AI: " + dr["Response"].ToString());
+            }
+            con.Close();
+
+            return sb.ToString();
+        }
+
+        //private void LoadMessages()
+        //{
+        //    get_connection();
+        //    StringBuilder sb = new StringBuilder();
+
+        //    string query = "SELECT Prompt, Response FROM chat_messages WHERE ChatId='" + chatId + "' ORDER BY CreatedAt ASC";
+        //    SqlCommand cmd = new SqlCommand(query, con);
+
+        //    SqlDataReader dr = cmd.ExecuteReader();
+        //    while (dr.Read())
+        //    {
+        //        string userMsg = dr["Prompt"].ToString();
+        //        string aiMsg = dr["Response"].ToString();
+
+        //        sb.Append($@"
+        //                <div class='message user'>
+        //                    <div class='avatar'>{userEmail[0].ToString()}</div>
+        //                    <div class='bubble'>{userMsg}</div>
+        //                </div>
+        //                <div class='message assistant'>
+        //                    <div class='avatar'>AI</div>
+        //                    <div class='bubble'>{aiMsg}</div>
+        //                </div>");
+        //    }
+        //    con.Close();
+
+        //    chatFeed.InnerHtml = sb.ToString();
+        //}
+
+        private void LoadMessages()
+        {
+            get_connection();
+            StringBuilder sb = new StringBuilder();
+
+            string query = "SELECT Prompt, Response FROM chat_messages WHERE ChatId='" + chatId + "' ORDER BY CreatedAt ASC";
+            SqlCommand cmd = new SqlCommand(query, con);
+
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            if (!dr.HasRows)
+            {
+                dr.Close();
+                con.Close();
+                Response.Redirect("Home.aspx");
+                return;
+            }
+
+            while (dr.Read())
+            {
                 string userMsg = dr["Prompt"].ToString();
                 string aiMsg = dr["Response"].ToString();
 
+                // Convert markdown to HTML
+                string formattedAiMsg = Markdown.ToHtml(aiMsg);
+
                 sb.Append($@"
-                        <div class='message user'>
-                            <div class='avatar'>{userEmail[0].ToString()}</div>
-                            <div class='bubble'>{userMsg}</div>
-                        </div>
-                        <div class='message assistant'>
-                            <div class='avatar'>AI</div>
-                            <div class='bubble'>{aiMsg}</div>
-                        </div>");
+            <div class='message user'>
+                <div class='avatar'>{userEmail[0]}</div>
+                <div class='bubble'>{userMsg}</div>
+            </div>
+            <div class='message assistant'>
+                <div class='avatar'>AI</div>
+                <div class='bubble'>{formattedAiMsg}</div>
+            </div>");
             }
             con.Close();
 
@@ -130,16 +196,17 @@ namespace airesumebuilder
                 get_connection();
 
                 // First delete messages of this chat
-                string deleteMessages = "DELETE FROM chat_messages WHERE ChatId='"+chatId+"'";
+                string deleteMessages = "DELETE FROM chat_messages WHERE ChatId='" + chatId + "'";
                 SqlCommand cmd1 = new SqlCommand(deleteMessages, con);
                 cmd1.ExecuteNonQuery();
 
                 // Then delete the chat session
-                string deleteSession = "DELETE FROM chat_sessions WHERE ChatId='"+chatId+"'";
+                string deleteSession = "DELETE FROM chat_sessions WHERE ChatId='" + chatId + "'";
                 SqlCommand cmd2 = new SqlCommand(deleteSession, con);
                 cmd2.ExecuteNonQuery();
 
                 con.Close();
+                Response.Redirect("Home.aspx");
 
                 LoadChatSessions();
             }
