@@ -80,9 +80,9 @@
             display: none;
         }
 
-        .message-container.show {
-            display: block;
-        }
+            .message-container.show {
+                display: block;
+            }
 
         .form-group {
             margin-bottom: 20px;
@@ -109,20 +109,20 @@
             transition: all 0.2s ease;
         }
 
-        .form-input::placeholder {
-            color: var(--text-secondary);
-            opacity: 0.7;
-        }
+            .form-input::placeholder {
+                color: var(--text-secondary);
+                opacity: 0.7;
+            }
 
-        .form-input:focus {
-            border-color: var(--accent-main);
-            box-shadow: 0 0 0 2px rgba(25, 195, 125, 0.2);
-            background-color: var(--input-focus);
-        }
+            .form-input:focus {
+                border-color: var(--accent-main);
+                box-shadow: 0 0 0 2px rgba(25, 195, 125, 0.2);
+                background-color: var(--input-focus);
+            }
 
-        .form-input:hover {
-            border-color: var(--border-light);
-        }
+            .form-input:hover {
+                border-color: var(--border-light);
+            }
 
         .validation-error {
             color: var(--danger-main);
@@ -150,10 +150,10 @@
             transition: all 0.2s ease;
         }
 
-        .file-upload:hover {
-            border-color: var(--border-light);
-            background-color: var(--input-focus);
-        }
+            .file-upload:hover {
+                border-color: var(--border-light);
+                background-color: var(--input-focus);
+            }
 
         .gender-container {
             display: flex;
@@ -194,30 +194,30 @@
             margin: 24px 0;
         }
 
-        .register-button:hover {
-            background-color: var(--accent-hover);
-            border-color: var(--accent-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 16px rgba(25, 195, 125, 0.3);
-        }
+            .register-button:hover {
+                background-color: var(--accent-hover);
+                border-color: var(--accent-hover);
+                transform: translateY(-1px);
+                box-shadow: 0 4px 16px rgba(25, 195, 125, 0.3);
+            }
 
-        .register-button:active {
-            transform: translateY(0);
-        }
+            .register-button:active {
+                transform: translateY(0);
+            }
 
-        .register-button:focus-visible {
-            outline: 2px solid var(--accent-main);
-            outline-offset: 2px;
-        }
+            .register-button:focus-visible {
+                outline: 2px solid var(--accent-main);
+                outline-offset: 2px;
+            }
 
-        .register-button:disabled {
-            background-color: var(--surface-tertiary);
-            border-color: var(--border-light);
-            color: var(--text-secondary);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
+            .register-button:disabled {
+                background-color: var(--surface-tertiary);
+                border-color: var(--border-light);
+                color: var(--text-secondary);
+                cursor: not-allowed;
+                transform: none;
+                box-shadow: none;
+            }
 
         .login-link {
             text-align: center;
@@ -225,23 +225,23 @@
             border-top: 1px solid var(--border-light);
         }
 
-        .login-link p {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin: 0;
-        }
+            .login-link p {
+                color: var(--text-secondary);
+                font-size: 14px;
+                margin: 0;
+            }
 
-        .login-link a {
-            color: var(--accent-main);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
+            .login-link a {
+                color: var(--accent-main);
+                text-decoration: none;
+                font-weight: 500;
+                transition: color 0.2s ease;
+            }
 
-        .login-link a:hover {
-            color: var(--accent-hover);
-            text-decoration: underline;
-        }
+                .login-link a:hover {
+                    color: var(--accent-hover);
+                    text-decoration: underline;
+                }
 
         /* Loading animation for button */
         .register-button.loading {
@@ -249,25 +249,26 @@
             color: transparent;
         }
 
-        .register-button.loading:after {
-            content: "";
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            top: 50%;
-            left: 50%;
-            margin-left: -10px;
-            margin-top: -10px;
-            border-radius: 50%;
-            border: 2px solid transparent;
-            border-top-color: currentColor;
-            animation: button-loading-spinner 1s ease infinite;
-        }
+            .register-button.loading:after {
+                content: "";
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                top: 50%;
+                left: 50%;
+                margin-left: -10px;
+                margin-top: -10px;
+                border-radius: 50%;
+                border: 2px solid transparent;
+                border-top-color: currentColor;
+                animation: button-loading-spinner 1s ease infinite;
+            }
 
         @keyframes button-loading-spinner {
             from {
                 transform: rotate(0turn);
             }
+
             to {
                 transform: rotate(1turn);
             }
@@ -329,10 +330,10 @@
             border-color: var(--danger-main);
         }
 
-        .form-group.error .form-input:focus {
-            border-color: var(--danger-main);
-            box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
-        }
+            .form-group.error .form-input:focus {
+                border-color: var(--danger-main);
+                box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+            }
 
         /* Custom file upload styling */
         .file-upload input[type="file"] {
@@ -353,15 +354,15 @@
             text-align: center;
         }
 
-        .file-upload-label:hover {
-            border-color: var(--border-light);
-            background-color: var(--input-focus);
-        }
+            .file-upload-label:hover {
+                border-color: var(--border-light);
+                background-color: var(--input-focus);
+            }
 
-        .file-upload-label::before {
-            content: "📎 ";
-            margin-right: 8px;
-        }
+            .file-upload-label::before {
+                content: "📎 ";
+                margin-right: 8px;
+            }
 
         /* Smooth transitions */
         .register-container * {
@@ -377,7 +378,7 @@
                 <p class="register-subtitle">Join us today</p>
             </div>
 
-            <div class="message-container">
+            <div class='message-container <%= !string.IsNullOrEmpty(LabelMessage.Text) ? "show" : "" %>'>
                 <asp:Label ID="LabelMessage" runat="server"></asp:Label>
             </div>
 
@@ -385,7 +386,7 @@
                 <asp:Label ID="LabelName" runat="server" AssociatedControlID="TextBoxName" CssClass="form-label" Text="Full Name"></asp:Label>
                 <asp:TextBox ID="TextBoxName" runat="server" CssClass="form-input"
                     placeholder="Your full name"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidatorName" runat="server" ControlToValidate="TextBoxName" 
+                <asp:RequiredFieldValidator ID="RequiredFieldValidatorName" runat="server" ControlToValidate="TextBoxName"
                     ErrorMessage="Name is required." CssClass="validation-error" Display="Dynamic" />
             </div>
 
@@ -393,10 +394,10 @@
                 <asp:Label ID="LabelEmail" runat="server" AssociatedControlID="TextBoxEmail" CssClass="form-label" Text="Email"></asp:Label>
                 <asp:TextBox ID="TextBoxEmail" runat="server" CssClass="form-input"
                     placeholder="you@example.com" TextMode="Email"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidatorEmail" runat="server" ControlToValidate="TextBoxEmail" 
+                <asp:RequiredFieldValidator ID="RequiredFieldValidatorEmail" runat="server" ControlToValidate="TextBoxEmail"
                     ErrorMessage="Email is required." CssClass="validation-error" Display="Dynamic" />
                 <asp:RegularExpressionValidator ID="RegexValidatorEmail" runat="server" ControlToValidate="TextBoxEmail"
-                    ValidationExpression="^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$" ErrorMessage="Invalid email format." 
+                    ValidationExpression="^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$" ErrorMessage="Invalid email format."
                     CssClass="validation-error" Display="Dynamic" />
             </div>
 
@@ -404,10 +405,10 @@
                 <asp:Label ID="LabelMobile" runat="server" AssociatedControlID="TextBoxMobile" CssClass="form-label" Text="Mobile"></asp:Label>
                 <asp:TextBox ID="TextBoxMobile" runat="server" CssClass="form-input"
                     placeholder="Your mobile number" TextMode="Phone"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidatorMobile" runat="server" ControlToValidate="TextBoxMobile" 
+                <asp:RequiredFieldValidator ID="RequiredFieldValidatorMobile" runat="server" ControlToValidate="TextBoxMobile"
                     ErrorMessage="Mobile number is required." CssClass="validation-error" Display="Dynamic" />
                 <asp:RegularExpressionValidator ID="RegexValidatorMobile" runat="server" ControlToValidate="TextBoxMobile"
-                    ValidationExpression="^\+?[0-9]{10,15}$" ErrorMessage="Invalid mobile number format." 
+                    ValidationExpression="^\+?[0-9]{10,15}$" ErrorMessage="Invalid mobile number format."
                     CssClass="validation-error" Display="Dynamic" />
             </div>
 
@@ -415,7 +416,7 @@
                 <asp:Label ID="LabelPassword" runat="server" AssociatedControlID="TextBoxPassword" CssClass="form-label" Text="Password"></asp:Label>
                 <asp:TextBox ID="TextBoxPassword" runat="server" CssClass="form-input"
                     TextMode="Password" placeholder="Choose a strong password"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidatorPassword" runat="server" ControlToValidate="TextBoxPassword" 
+                <asp:RequiredFieldValidator ID="RequiredFieldValidatorPassword" runat="server" ControlToValidate="TextBoxPassword"
                     ErrorMessage="Password is required." CssClass="validation-error" Display="Dynamic" />
             </div>
 

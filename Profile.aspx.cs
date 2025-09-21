@@ -22,12 +22,9 @@ namespace airesumebuilder
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            get_connection();
+            AuthHelper.RequireLogin(this);
 
-            if (Session["userLoggedIn"] != "true")
-            {
-                Response.Redirect("Login.aspx");
-            }
+            get_connection();
 
             if (Session["successMessage"] != null)
             {

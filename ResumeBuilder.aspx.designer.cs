@@ -24,15 +24,6 @@ namespace airesumebuilder
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// resumeFormContainer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl resumeFormContainer;
-
-        /// <summary>
         /// txtFullName control.
         /// </summary>
         /// <remarks>
@@ -168,21 +159,39 @@ namespace airesumebuilder
         protected global::System.Web.UI.WebControls.TextBox txtSoftSkills;
 
         /// <summary>
-        /// SaveResumeBtn control.
+        /// btnGenerate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SaveResumeBtn;
+        protected global::System.Web.UI.WebControls.Button btnGenerate;
 
         /// <summary>
-        /// hdnSelectedTemplate control.
+        /// btnReset control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnSelectedTemplate;
+        protected global::System.Web.UI.WebControls.Button btnReset;
+
+        /// <summary>
+        /// pnlError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlError;
+
+        /// <summary>
+        /// litError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litError;
     }
 }

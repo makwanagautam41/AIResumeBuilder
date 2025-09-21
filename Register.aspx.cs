@@ -21,11 +21,10 @@ namespace airesumebuilder
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            AuthHelper.RequireAnonymous(this);
+
             get_connection();
-            if (Session["userLoggedIn"] == "true")
-            {
-                Response.Redirect("Home.aspx");
-            }
+
         }
 
         void get_connection()
@@ -77,7 +76,7 @@ namespace airesumebuilder
 
             get_connection();
             img_upload();
-            String query = "INSERT INTO user_tbl(Name, Email, Mobile, Password,Image,Gender) VALUES ('" + name + "','" + email + "','" + mobile + "','" + password + "','"+img_file_name+"','"+genderRadioButton.Text+"')";
+            String query = "INSERT INTO user_tbl(Name, Email, Mobile, Password,Image,Gender) VALUES ('" + name + "','" + email + "','" + mobile + "','" + password + "','" + img_file_name + "','" + genderRadioButton.Text + "')";
             cmd = new SqlCommand(query, con);
             try
             {

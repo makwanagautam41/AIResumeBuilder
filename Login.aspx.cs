@@ -16,6 +16,8 @@ namespace airesumebuilder
         SqlCommand cmd;
         protected void Page_Load(object sender, EventArgs e)
         {
+            AuthHelper.RequireAnonymous(this);
+
             if (Session["successMessage"] != null)
             {
                 LabelMessage.Text = Session["successMessage"].ToString();
@@ -23,10 +25,6 @@ namespace airesumebuilder
                 Session["successMessage"] = null;
             }
 
-            if (Session["userLoggedIn"] == "true")
-            {
-                Response.Redirect("Home.aspx");
-            }
         }
         void get_connection()
         {
@@ -67,6 +65,7 @@ namespace airesumebuilder
             {
                 LabelMessage.Text = "User with this email does not exist.";
                 LabelMessage.ForeColor = System.Drawing.Color.Red;
+                LabelMessage.Parent.Visible = true;
                 return;
             }
 
@@ -83,7 +82,15 @@ namespace airesumebuilder
                     string idQuery = "select Id from user_tbl where Email='" + email + "' and Password='" + password + "'";
                     cmd = new SqlCommand(idQuery, con);
                     Session["UserId"] = Convert.ToInt32(cmd.ExecuteScalar());
-                    Response.Redirect("Home.aspx");
+                    string returnUrl = Request.QueryString["ReturnUrl"];
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        Response.Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        Response.Redirect("Home.aspx");
+                    }
                 }
                 else
                 {
@@ -101,33 +108,5 @@ namespace airesumebuilder
                 con.Close();
             }
         }
-
-        //protected void ButtonLogin_Click(object sender, EventArgs e)
-        //{
-        //    get_connection();
-        //    string email = TextBoxEmail.Text.Trim();
-        //    string password = TextBoxPassword.Text.Trim();
-
-        //    string query = "select count(*) from user_tbl where Email='" + email + "' and Password='" + password + "'";
-        //    cmd = new SqlCommand(query, con);
-        //    int count = (int)cmd.ExecuteScalar();
-
-        //    if (count > 0)
-        //    {
-        //        Session["userLoggedIn"] = "true";
-        //        Session["userEmail"] = email;
-
-        //        string idQuery = "select Id from user_tbl where Email='" + email + "' and Password='" + password + "'";
-        //        cmd = new SqlCommand(idQuery, con);
-        //        Session["UserId"] = Convert.ToInt32(cmd.ExecuteScalar());
-
-        //        Response.Redirect("Home.aspx");
-        //    }
-        //    else
-        //    {
-        //        LabelMessage.Text = "Invalid password.";
-        //        LabelMessage.ForeColor = System.Drawing.Color.Red;
-        //    }
-        //}
     }
 }

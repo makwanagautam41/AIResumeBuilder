@@ -79,9 +79,9 @@
             display: none;
         }
 
-        .message-container.show {
-            display: block;
-        }
+            .message-container.show {
+                display: block;
+            }
 
         .form-group {
             margin-bottom: 24px;
@@ -108,20 +108,20 @@
             transition: all 0.2s ease;
         }
 
-        .form-input::placeholder {
-            color: var(--text-secondary);
-            opacity: 0.7;
-        }
+            .form-input::placeholder {
+                color: var(--text-secondary);
+                opacity: 0.7;
+            }
 
-        .form-input:focus {
-            border-color: var(--accent-main);
-            box-shadow: 0 0 0 2px rgba(25, 195, 125, 0.2);
-            background-color: var(--input-focus);
-        }
+            .form-input:focus {
+                border-color: var(--accent-main);
+                box-shadow: 0 0 0 2px rgba(25, 195, 125, 0.2);
+                background-color: var(--input-focus);
+            }
 
-        .form-input:hover {
-            border-color: var(--border-light);
-        }
+            .form-input:hover {
+                border-color: var(--border-light);
+            }
 
         .validation-error {
             color: var(--danger-main);
@@ -145,30 +145,30 @@
             margin-bottom: 24px;
         }
 
-        .login-button:hover {
-            background-color: var(--accent-hover);
-            border-color: var(--accent-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 16px rgba(25, 195, 125, 0.3);
-        }
+            .login-button:hover {
+                background-color: var(--accent-hover);
+                border-color: var(--accent-hover);
+                transform: translateY(-1px);
+                box-shadow: 0 4px 16px rgba(25, 195, 125, 0.3);
+            }
 
-        .login-button:active {
-            transform: translateY(0);
-        }
+            .login-button:active {
+                transform: translateY(0);
+            }
 
-        .login-button:focus-visible {
-            outline: 2px solid var(--accent-main);
-            outline-offset: 2px;
-        }
+            .login-button:focus-visible {
+                outline: 2px solid var(--accent-main);
+                outline-offset: 2px;
+            }
 
-        .login-button:disabled {
-            background-color: var(--surface-tertiary);
-            border-color: var(--border-light);
-            color: var(--text-secondary);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
+            .login-button:disabled {
+                background-color: var(--surface-tertiary);
+                border-color: var(--border-light);
+                color: var(--text-secondary);
+                cursor: not-allowed;
+                transform: none;
+                box-shadow: none;
+            }
 
         .register-link {
             text-align: center;
@@ -176,23 +176,23 @@
             border-top: 1px solid var(--border-light);
         }
 
-        .register-link p {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin: 0;
-        }
+            .register-link p {
+                color: var(--text-secondary);
+                font-size: 14px;
+                margin: 0;
+            }
 
-        .register-link a {
-            color: var(--accent-main);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
+            .register-link a {
+                color: var(--accent-main);
+                text-decoration: none;
+                font-weight: 500;
+                transition: color 0.2s ease;
+            }
 
-        .register-link a:hover {
-            color: var(--accent-hover);
-            text-decoration: underline;
-        }
+                .register-link a:hover {
+                    color: var(--accent-hover);
+                    text-decoration: underline;
+                }
 
         /* Loading animation for button */
         .login-button.loading {
@@ -200,25 +200,26 @@
             color: transparent;
         }
 
-        .login-button.loading:after {
-            content: "";
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            top: 50%;
-            left: 50%;
-            margin-left: -10px;
-            margin-top: -10px;
-            border-radius: 50%;
-            border: 2px solid transparent;
-            border-top-color: currentColor;
-            animation: button-loading-spinner 1s ease infinite;
-        }
+            .login-button.loading:after {
+                content: "";
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                top: 50%;
+                left: 50%;
+                margin-left: -10px;
+                margin-top: -10px;
+                border-radius: 50%;
+                border: 2px solid transparent;
+                border-top-color: currentColor;
+                animation: button-loading-spinner 1s ease infinite;
+            }
 
         @keyframes button-loading-spinner {
             from {
                 transform: rotate(0turn);
             }
+
             to {
                 transform: rotate(1turn);
             }
@@ -263,10 +264,10 @@
             border-color: var(--danger-main);
         }
 
-        .form-group.error .form-input:focus {
-            border-color: var(--danger-main);
-            box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
-        }
+            .form-group.error .form-input:focus {
+                border-color: var(--danger-main);
+                box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+            }
 
         /* Smooth transitions */
         .login-container * {
@@ -282,18 +283,19 @@
                 <p class="login-subtitle">Sign in to your account</p>
             </div>
 
-            <div class="message-container">
+            <div class='message-container <%= !string.IsNullOrEmpty(LabelMessage.Text) ? "show" : "" %>'>
                 <asp:Label ID="LabelMessage" runat="server"></asp:Label>
             </div>
+
 
             <div class="form-group">
                 <asp:Label ID="LabelEmail" runat="server" AssociatedControlID="TextBoxEmail" CssClass="form-label" Text="Email"></asp:Label>
                 <asp:TextBox ID="TextBoxEmail" runat="server" CssClass="form-input"
                     placeholder="you@example.com" TextMode="Email"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidatorEmail" runat="server" ControlToValidate="TextBoxEmail" 
+                <asp:RequiredFieldValidator ID="RequiredFieldValidatorEmail" runat="server" ControlToValidate="TextBoxEmail"
                     ErrorMessage="Email is required." CssClass="validation-error" Display="Dynamic" />
                 <asp:RegularExpressionValidator ID="RegexValidatorEmail" runat="server" ControlToValidate="TextBoxEmail"
-                    ValidationExpression="^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$" ErrorMessage="Invalid email format." 
+                    ValidationExpression="^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$" ErrorMessage="Invalid email format."
                     CssClass="validation-error" Display="Dynamic" />
             </div>
 
@@ -301,7 +303,7 @@
                 <asp:Label ID="LabelPassword" runat="server" AssociatedControlID="TextBoxPassword" CssClass="form-label" Text="Password"></asp:Label>
                 <asp:TextBox ID="TextBoxPassword" runat="server" CssClass="form-input"
                     TextMode="Password" placeholder="Your password"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidatorPassword" runat="server" ControlToValidate="TextBoxPassword" 
+                <asp:RequiredFieldValidator ID="RequiredFieldValidatorPassword" runat="server" ControlToValidate="TextBoxPassword"
                     ErrorMessage="Password is required." CssClass="validation-error" Display="Dynamic" />
             </div>
 

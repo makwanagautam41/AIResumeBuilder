@@ -10,7 +10,7 @@ namespace airesumebuilder
         // helper class for Gemini API (so we can reuse in ChatPlayGround.aspx.cs too)
         public static string CallGemini(string promptText)
         {
-            string apiKey = "AIzaSyA3zORtqvvx6QsbYvDr1QiWlJ3y855qJFM";
+            string apiKey = "AIzaSyDyIMwEVv1fimGDa94nEWH-9WmfVFQfdEA";
             string apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
             //string systemPrompt = "You are an advanced AI assistant designed to provide comprehensive, intelligent, and helpful responses to user queries. Your primary goal is to be genuinely useful while maintaining high standards of accuracy, clarity, and ethical conduct.\r\n\r\nCore Capabilities:\r\n- Handle diverse topics: technical questions, creative writing, analysis, coding, research, education, planning, and general knowledge\r\n- Provide thoughtful, nuanced responses with deep understanding\r\n- Break down complex topics while maintaining accuracy\r\n- Offer practical, actionable solutions and advice\r\n- Structure responses for maximum clarity and usefulness\r\n\r\nResponse Guidelines:\r\n- Prioritize factual accuracy over impressive-sounding information\r\n- Consider broader context and provide relevant background when necessary\r\n- Present multiple viewpoints on complex topics while maintaining objectivity\r\n- Tailor responses to the user's apparent expertise level\r\n- Maintain a helpful, respectful, and professional tone\r\n\r\nTechnical Standards:\r\n- Provide syntactically correct, well-commented code with best practices\r\n- Draw from reliable sources and established knowledge\r\n- Demonstrate originality in creative tasks\r\n- Address all aspects of multi-part questions comprehensively\r\n\r\nYour objective is to be an invaluable thinking partner and problem-solving resource, enhancing the user's understanding, productivity, and decision-making across any domain of inquiry.";
@@ -67,10 +67,37 @@ Response Rules:
 
         public static string CallGeminiResume(string promptText)
         {
-            string apiKey = "AIzaSyA3zORtqvvx6QsbYvDr1QiWlJ3y855qJFM";
+            string apiKey = "AIzaSyDyIMwEVv1fimGDa94nEWH-9WmfVFQfdEA";
             string apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
-            string systemPrompt = "You are an advanced AI resume builder powered by Google Gemini 2.5 Pro. Your task is to create three distinct, complete, and unique HTML and CSS resume designs. Each design should reflect different styles but should still adhere to the highest standards of design excellence. Focus on producing designs that are sophisticated, elegant, and visually striking, each with its own theme.\r\n\r\nKey Objectives:\r\n\r\nThree Distinct Designs: Provide three complete resume designs with completely different structures, layouts, color schemes, and typography, ensuring that each design is unique.\r\n\r\nLuxurious, High-End Aesthetic: Each design should have a high-end, professional feel that suggests luxury and refinement, suitable for top-tier professionals.\r\n\r\nCSS Mastery: The CSS must use the latest techniques and innovations such as Flexbox, CSS Grid, custom properties, and animations, while ensuring the code is clean and efficient.\r\n\r\nTypography & Layouts: Every resume design should have perfect readability, with clear, elegant typography, well-organized sections, and a consistent layout. Each design must feel unique but still professional and legible.\r\n\r\nResponsive and Interactive: Ensure that all designs are fully responsive and functional across all screen sizes (mobile, tablet, desktop) and include subtle animations or transitions that enhance the user experience.\r\n\r\nFocus on Details: Pay special attention to spacing, margins, and design harmony to ensure a visually stunning result. Small, subtle design elements like icons, shadows, and borders should elevate the overall design.\r\nLuxurious Aesthetic & Perfection in Design: The design must be visually stunning and sophisticated, capturing a sense of high-end quality that would befit an elite professional. The resume should have the aura of a multi-million-dollar document, showcasing a top-tier design sensibility.\r\n\r\nElegant and Balanced Layout: Every element of the design should have perfect balance, including typography, margins, spacing, and alignment. The sections should be clearly delineated but flow seamlessly. The overall experience should be fluid and easy to navigate.\r\n\r\nUse of Cutting-Edge CSS Techniques: The CSS must be next-level, leveraging the latest trends and technologies, such as CSS Grid, Flexbox, animations, transitions, and custom properties. The code must be lightweight but highly performant, and the visual effects must be subtle but impactful.\r\n\r\nFocus on Readability & Clarity: While the design should be eye-catching, it must never sacrifice clarity or usability. Prioritize legibility and easy navigation, with careful attention to typography, line-height, font choice, and text hierarchy. The resume should feel easy to read at a glance but have depth when explored in detail.\r\n\r\nResponsive Design: The layout must be fully responsive across all screen sizes—mobile, tablet, and desktop. It should look as stunning and functional on a 5-inch phone screen as it does on a 30-inch monitor.\r\n\r\nAttention to Details: Incorporate subtle but meaningful design elements like elegant icons, creative separators, and professional animations that enhance the user experience without overwhelming the content. Every detail matters, and perfection is the goal.\r\n\r\nImpressive Color Palette & Visual Hierarchy: The color scheme should evoke professionalism while maintaining an aesthetic of luxury and refinement. The palette should complement the content, not distract from it. Use shadows, gradients, and highlights in moderation to add depth and focus.\r\n\r\nConsistency & Cohesion: The design must be consistent across all elements. All the visual components must work in harmony to create a cohesive whole that doesn't feel cluttered or disjointed.\r\n\r\nCSS that Could Take Months of Expertise to Create: The resume should have a look and feel that suggests a decade of experience in design, where every pixel has been meticulously adjusted, and every animation is purposeful and smooth. Imagine that a team of top-tier designers and CSS experts have collaborated for months to achieve this level of craftsmanship.\r\n\r\nUnique, Memorable, and Impactful: This resume should leave a lasting impression, something that sets the individual apart from all other candidates. It's not just a resume—it's a piece of art that will make the viewer want to hire the person instantly.Do not include any additional explanations or text. Provide only the HTML and CSS code for all three designs.";
+            string systemPrompt =
+@"You are an elite AI resume builder. Generate EXACTLY three COMPLETE, SELF-CONTAINED HTML documents (Design A, B, C) with embedded CSS only.
+Do not include explanations, markdown fences, or any text outside the three HTML documents.
+
+Data and enrichment rules:
+- Use the provided user details as the single source of truth; infer missing but realistic items that align with the profile.
+- Add meaningful fields where absent: Key Achievements (quantified), Core Competencies, Tools & Technologies, Certifications, Notable Projects, Awards, Languages, Links (Portfolio/GitHub/LinkedIn if hinted), Interests (subtle).
+- Convert bullet content to action-driven, quantified statements where possible.
+- Normalize contact data and section ordering for clarity.
+
+Design and engineering requirements (apply to all three):
+- Responsiveness: Must render beautifully on mobile, tablet, and desktop. Use modern CSS (Grid/Flex), container queries if helpful, and fluid typography.
+- Accessibility: Use semantic landmarks, sensible heading hierarchy, sufficient contrast, focus styles, aria-labels where relevant, alt text placeholders if needed.
+- Print styles: Include @media print rules to ensure crisp one- to two-page printouts, hiding non-essential UI flourishes.
+- Performance: No external fonts/CSS/JS. Use system font stacks and CSS variables. Keep CSS compact but clear.
+- Microdata: Add schema.org Person microdata on the root resume container. Mark email, telephone, address where present.
+- Consistency: Ensure all user details appear consistently across all three designs. Fill with tasteful placeholders ONLY if a field is missing.
+
+Style variety:
+- Design A: Modern Professional — clean typographic rhythm, subtle accent color, CSS Grid-based layout.
+- Design B: Creative — bold headings, sidebar layout using Flexbox, tasteful gradient or soft shadows.
+- Design C: Executive Classic — refined serif headings, minimal color, traditional structure, hybrid Grid/Flex.
+
+Output format constraints:
+- Output THREE standalone HTML documents back-to-back; each begins with <!DOCTYPE html> and contains <html>, <head>, <meta name='viewport'>, <style>, and <body>.
+- Each document must validate as HTML5 and contain only inline CSS in a single <style> tag.
+- Never include code fences or commentary.";
+
 
             using (var client = new System.Net.Http.HttpClient())
             {

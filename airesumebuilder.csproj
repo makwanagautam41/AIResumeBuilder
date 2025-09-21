@@ -134,11 +134,13 @@
     <Content Include="Profile.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="ResumeBuilder.aspx" />
+    <Content Include="ResumePlayGround.aspx" />
     <Content Include="temp.aspx" />
     <Content Include="web-images\login-bg.jpg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthHelper.cs" />
     <Compile Include="ChatPlayGround.aspx.cs">
       <DependentUpon>ChatPlayGround.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -203,6 +205,13 @@
     </Compile>
     <Compile Include="ResumeBuilder.aspx.designer.cs">
       <DependentUpon>ResumeBuilder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ResumePlayGround.aspx.cs">
+      <DependentUpon>ResumePlayGround.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ResumePlayGround.aspx.designer.cs">
+      <DependentUpon>ResumePlayGround.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site1.Master.cs">
       <DependentUpon>Site1.Master</DependentUpon>

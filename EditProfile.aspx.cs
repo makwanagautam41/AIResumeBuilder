@@ -24,10 +24,7 @@ namespace airesumebuilder
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["userLoggedIn"] != "true")
-            {
-                Response.Redirect("Login.aspx");
-            }
+            AuthHelper.RequireLogin(this);
 
             if (Request.Form["ButtonUpdate"] == null)
             {
