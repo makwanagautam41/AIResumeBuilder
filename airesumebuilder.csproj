@@ -124,6 +124,7 @@
       <DependentUpon>ai_resume_builder_db.mdf</DependentUpon>
     </Content>
     <Content Include="ChatPlayGround.aspx" />
+    <Content Include="Checkout.aspx" />
     <Content Include="css\index.css" />
     <Content Include="css\resume-style.css" />
     <Content Include="css\style.css" />
@@ -148,6 +149,13 @@
     </Compile>
     <Compile Include="ChatPlayGround.aspx.designer.cs">
       <DependentUpon>ChatPlayGround.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Checkout.aspx.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Checkout.aspx.designer.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
     </Compile>
     <Compile Include="EditProfile.aspx.cs">
       <DependentUpon>EditProfile.aspx</DependentUpon>
