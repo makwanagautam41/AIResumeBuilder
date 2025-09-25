@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Web.UI;
@@ -21,34 +22,24 @@ namespace airesumebuilder
 
         protected void btnGenerate_Click(object sender, EventArgs e)
         {
-            // This script shows the loader immediately on button click
-            string showLoadingScript = @"
-                document.getElementById('resumeFormContainer').style.display = 'none';
-                document.getElementById('loadingContainer').style.display = 'block';";
-            ClientScript.RegisterStartupScript(GetType(), "ShowLoading", showLoadingScript, true);
-
             try
             {
-                // 1. Build the prompt for the AI
+                // Build the prompt for the AI
                 string userPrompt = BuildResumePrompt();
 
-                // 2. Call your Gemini API class
-                // IMPORTANT: You must have your 'Gemini_Class.cs' file with the 'CallGeminiResume' method.
                 string aiResponse = Gemini_Class.CallGeminiResume(userPrompt);
 
-                // 3. Clean and separate the 3 HTML resume designs
+                // Clean and separate the 3 HTML resume designs
                 string cleanedResponse = CleanAIResponse(aiResponse);
                 string[] resumes = ExtractResumeDesigns(cleanedResponse);
 
-                // 4. Use fallbacks if AI response isn't structured correctly
+                // Use fallbacks if AI response isn't structured correctly
                 string resume1 = (resumes.Length > 0 && !string.IsNullOrWhiteSpace(resumes[0])) ? resumes[0] : GenerateFallbackResume(1);
                 string resume2 = (resumes.Length > 1 && !string.IsNullOrWhiteSpace(resumes[1])) ? resumes[1] : GenerateFallbackResume(2);
                 string resume3 = (resumes.Length > 2 && !string.IsNullOrWhiteSpace(resumes[2])) ? resumes[2] : GenerateFallbackResume(3);
 
-                // 5. Save the results to the database
                 int newResumeId = SaveResumesToDatabase(resume1, resume2, resume3);
 
-                // 6. Redirect to the new page with the generated ID
                 Response.Redirect($"ResumePlayGround.aspx?id={newResumeId}");
             }
             catch (Exception ex)
@@ -80,7 +71,26 @@ namespace airesumebuilder
             }
         }
 
-        #region Helper Methods from Original File
+        //private int SaveResumesToDatabase(string html1, string html2, string html3)
+        //{
+        //    string connectionString = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+        //    SqlConnection con;
+        //    SqlCommand cmd;
+
+        //    using (con = new SqlConnection(connectionString))
+        //    {
+        //        string query = "INSERT INTO GeneratedResumes (UserId, ResumeHtml1, ResumeHtml2, ResumeHtml3) " +
+        //                       "VALUES ('" + userId + "','" + html1 + "','" + html2 + "','" + html3 + "'); " +
+        //                       "SELECT SCOPE_IDENTITY();";
+
+        //        cmd = new SqlCommand(query, con);
+        //        con.Open();
+        //        int newId = Convert.ToInt32(cmd.ExecuteScalar());
+        //        return newId;
+        //    }
+        //}
+
+
         private string BuildResumePrompt()
         {
             var sb = new StringBuilder();
@@ -119,7 +129,6 @@ namespace airesumebuilder
         private string GenerateFallbackResume(int templateType)
         {
             // This method creates a basic resume if the AI fails.
-            // Your original code for this method is perfectly fine.
             return $"<html><body><h1>Fallback Resume {templateType}</h1><p>Could not generate AI resume. Please try again.</p></body></html>";
         }
 
@@ -132,12 +141,6 @@ namespace airesumebuilder
                     <small style='color: #991b1b; display: block; margin-top: 10px;'>Details: {Server.HtmlEncode(message)}</small>
                 </div>";
             pnlError.Visible = true;
-
-            string hideLoadingScript = @"
-                document.getElementById('loadingContainer').style.display = 'none';
-                document.getElementById('resumeFormContainer').style.display = 'block';";
-            ClientScript.RegisterStartupScript(GetType(), "HideLoadingOnError", hideLoadingScript, true);
         }
-        #endregion
     }
 }

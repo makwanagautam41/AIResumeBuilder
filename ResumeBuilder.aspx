@@ -742,12 +742,6 @@
                             </div>
                         </div>
 
-                        <div id="loadingContainer" class="loading">
-                            <div class="loading-text">Generating your resumes with AI...</div>
-                            <div class="spinner"></div>
-                            <div class="loading-subtext">This may take 30-60 seconds. Please wait.</div>
-                        </div>
-
                         <asp:Panel ID="pnlError" runat="server" Visible="false">
                             <div class="error">
                                 <asp:Literal ID="litError" runat="server" />

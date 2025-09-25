@@ -14,33 +14,33 @@
                     <tr>
                         <td>Enter Name</td>
                         <td>
-                            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox></td>
+                            <asp:TextBox ID="planName" runat="server"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td>Enter Monthly Price</td>
-                        <td><asp:TextBox ID="TextBox2" runat="server"></asp:TextBox></td>
+                        <td><asp:TextBox ID="planMonthlyPrice" runat="server"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td>Enter Annual Price</td>
-                        <td><asp:TextBox ID="TextBox3" runat="server"></asp:TextBox></td>
+                        <td><asp:TextBox ID="planAnnualPrice" runat="server"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td>Enter Original Price</td>
-                        <td><asp:TextBox ID="TextBox4" runat="server"></asp:TextBox></td>
+                        <td><asp:TextBox ID="planOriginalPrice" runat="server"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td>Enter Description</td>
-                        <td><asp:TextBox ID="TextBox5" runat="server"></asp:TextBox></td>
+                        <td><asp:TextBox ID="planDescription" runat="server"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td>Is Popular Plan</td>
                         <td>
-                            <asp:CheckBox ID="CheckBox1" runat="server" /></td>
+                            <asp:CheckBox ID="planIsPopular" runat="server" /></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>
-                            <asp:Button ID="Button1" runat="server" Text="Button" /></td>
+                            <asp:Button ID="addPlanButton" runat="server" Text="Button" OnClick="addPlanButton_Click" /></td>
                     </tr>
                 </table>
             </center>

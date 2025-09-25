@@ -37,20 +37,20 @@ namespace airesumebuilder
 
             if (!IsPostBack)
             {
-                if (!int.TryParse(Request.QueryString["id"], out int resumeId) || resumeId <= 0)
+                int resumeId = Convert.ToInt32(Request.QueryString["id"]);
+                if (resumeId <= 0)
                 {
                     ShowError("Invalid or missing resume ID.");
                     return;
                 }
 
-                int selected = 1;
-                if (int.TryParse(Request.QueryString["selected"], out int sel) && sel >= 1 && sel <= 3)
-                    selected = sel;
+                int selected = Convert.ToInt32(Request.QueryString["selected"]);
+                if (selected < 1 || selected > 3) selected = 1;
 
                 CurrentResumeId = resumeId;
                 ActiveTemplate = selected;
 
-                var arr = LoadResumes(resumeId);
+                string[] arr = LoadResumes(resumeId);
                 if (arr == null)
                 {
                     ShowError("The requested resume could not be found.");
@@ -65,26 +65,31 @@ namespace airesumebuilder
         private string[] LoadResumes(int resumeId)
         {
             string cs = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
-            using (var con = new SqlConnection(cs))
-            using (var cmd = new SqlCommand("SELECT ResumeHtml1, ResumeHtml2, ResumeHtml3 FROM GeneratedResumes WHERE ResumeId=@id", con))
+            SqlConnection con = new SqlConnection(cs);
+            SqlCommand cmd = new SqlCommand("SELECT ResumeHtml1, ResumeHtml2, ResumeHtml3 FROM GeneratedResumes WHERE ResumeId='" + resumeId + "'", con);
+
+            con.Open();
+            SqlDataReader rd = cmd.ExecuteReader();
+
+            string[] result = null;
+
+            if (rd.Read())
             {
-                cmd.Parameters.AddWithValue("@id", resumeId);
-                con.Open();
-                using (var rd = cmd.ExecuteReader())
+                result = new string[]
                 {
-                    if (rd.Read())
-                    {
-                        return new[]
-                        {
-                            rd["ResumeHtml1"] as string ?? string.Empty,
-                            rd["ResumeHtml2"] as string ?? string.Empty,
-                            rd["ResumeHtml3"] as string ?? string.Empty
-                        };
-                    }
-                }
+                    rd["ResumeHtml1"] != DBNull.Value ? rd["ResumeHtml1"].ToString() : "",
+                    rd["ResumeHtml2"] != DBNull.Value ? rd["ResumeHtml2"].ToString() : "",
+                    rd["ResumeHtml3"] != DBNull.Value ? rd["ResumeHtml3"].ToString() : ""
+                };
             }
-            return null;
+
+            rd.Close();
+            con.Close();
+
+            return result;
         }
+
+
 
         private string[] EnsureNonEmpty(string[] input)
         {
@@ -128,9 +133,7 @@ namespace airesumebuilder
 
         protected void lnkTab_Click(object sender, EventArgs e)
         {
-            var link = (System.Web.UI.WebControls.LinkButton)sender;
-            int arg;
-            if (!int.TryParse(link.CommandArgument, out arg)) arg = 1;
+            int arg = Convert.ToInt32(((System.Web.UI.WebControls.LinkButton)sender).CommandArgument);
             if (arg < 1 || arg > 3) arg = 1;
 
             ActiveTemplate = arg;
