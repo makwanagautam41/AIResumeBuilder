@@ -1,66 +1,63 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ResumeBuilder.aspx.cs" Inherits="airesumebuilder.ResumeBuilder" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ResumePlayGround.aspx.cs" Inherits="airesumebuilder.ResumePlayGround" %>
 
 <!DOCTYPE html>
 <html>
 <head runat="server">
-    <title>AI Resume Builder</title>
+    <title>Resume Playground — AI Generated</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <style>
+        /* ChatGPT Theme Variables - Exact Match */
         :root {
-            --indigo-600: #4f46e5;
-            --indigo-700: #4338ca;
-            --indigo-50: #eef2ff;
-            --gray-50: #f8fafc;
-            --gray-100: #f1f5f9;
-            --gray-200: #e2e8f0;
-            --gray-300: #cbd5e1;
-            --gray-400: #94a3b8;
-            --gray-500: #64748b;
-            --gray-600: #475569;
-            --gray-700: #334155;
-            --gray-800: #1e293b;
-            --gray-900: #0f172a;
-            --white: #ffffff;
-            --border-radius: 12px;
-            --border-radius-lg: 16px;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --sidebar-width: 260px;
+            --text-primary: #ffffff;
+            --text-secondary: #c5c5d2;
+            --surface-primary: #212121;
+            --surface-secondary: #2f2f2f;
+            --surface-tertiary: #171717;
+            --border-light: #4e4f60;
+            --border-medium: #565869;
+            --accent-main: #19c37d;
+            --accent-hover: #0fa968;
+            --user-message-bg: #2f2f2f;
+            --assistant-message-bg: #212121;
         }
 
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--gray-100); /* Slightly darker background for contrast */
-            color: var(--gray-900);
-            line-height: 1.6;
+        body, html {
+            font-family: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background-color: var(--surface-primary);
+            height: 100%;
+            overflow-x: hidden;
         }
 
         .page-wrapper {
             display: flex;
+            height: 100vh;
+            width: 100vw;
+            background-color: var(--surface-primary);
         }
 
-        /* --- Sidebar Styles (Light Theme Redesign) --- */
+        /* Sidebar - Exact ChatGPT Styling */
         .sidebar {
-            width: var(--sidebar-width);
-            height: 100vh;
-            background-color: var(--gray-50);
-            border-right: 1px solid var(--gray-200);
-            color: var(--gray-800);
+            width: 260px;
+            background-color: var(--surface-tertiary);
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--border-light);
             position: fixed;
             top: 0;
             left: 0;
-            display: flex;
-            flex-direction: column;
-            padding: 16px;
-            transition: transform 0.3s ease-in-out;
+            height: 100vh;
             z-index: 1000;
+            transition: transform 0.3s ease-in-out;
+            padding: 16px;
         }
 
         .sidebar-header {
@@ -72,9 +69,9 @@
         }
 
         .sidebar-title {
-            font-weight: 700;
-            font-size: 20px;
-            color: var(--gray-900);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
         }
 
         .new-chat-btn {
@@ -85,54 +82,65 @@
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
-            border-radius: var(--border-radius);
-            border: 1px solid var(--gray-300);
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
             background-color: transparent;
-            color: var(--gray-700);
-            font-weight: 600;
+            color: var(--text-primary);
+            font-weight: 500;
             text-decoration: none;
-            transition: all 0.2s ease;
+            transition: all 0.1s ease;
+            font-size: 14px;
         }
 
-            .new-chat-btn:hover {
-                border-color: var(--gray-400);
-                background-color: var(--gray-100);
-            }
+        .new-chat-btn:hover {
+            background-color: var(--surface-secondary);
+            color: var(--text-primary);
+            text-decoration: none;
+        }
 
         .sidebar-nav {
             flex-grow: 1;
             overflow-y: auto;
         }
 
-            .sidebar-nav a {
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                padding: 12px 16px;
-                margin-bottom: 8px;
-                border-radius: var(--border-radius);
-                color: var(--gray-600);
-                text-decoration: none;
-                font-weight: 500;
-                transition: background-color 0.2s ease, color 0.2s ease;
-            }
+        .sidebar-nav::-webkit-scrollbar {
+            width: 8px;
+        }
 
-                .sidebar-nav a:hover {
-                    background-color: var(--gray-200);
-                    color: var(--gray-800);
-                }
+        .sidebar-nav::-webkit-scrollbar-track {
+            background: transparent;
+        }
 
-                .sidebar-nav a.active {
-                    background-color: var(--gray-800);
-                    color: var(--white);
-                }
+        .sidebar-nav::-webkit-scrollbar-thumb {
+            background: var(--border-light);
+            border-radius: 4px;
+        }
 
-                    .sidebar-nav a.active:hover {
-                        background-color: var(--gray-900);
-                    }
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.1s ease;
+        }
+
+        .sidebar-nav a:hover {
+            background-color: var(--surface-secondary);
+            color: var(--text-primary);
+        }
+
+        .sidebar-nav a.active {
+            background-color: var(--surface-secondary);
+            color: var(--text-primary);
+        }
 
         .sidebar-footer {
-            border-top: 1px solid var(--gray-200);
+            border-top: 1px solid var(--border-light);
             padding-top: 16px;
             display: flex;
             justify-content: space-between;
@@ -146,96 +154,49 @@
             padding: 8px 12px;
             border-radius: 8px;
             text-decoration: none;
-            color: var(--gray-600);
+            color: var(--text-secondary);
             font-weight: 500;
-            transition: background-color 0.2s ease, color 0.2s ease;
+            transition: all 0.1s ease;
         }
 
-            .sidebar-footer-link:hover {
-                background-color: var(--gray-200);
-                color: var(--gray-800);
-            }
+        .sidebar-footer-link:hover {
+            background-color: var(--surface-secondary);
+            color: var(--text-primary);
+        }
 
         .theme-toggle {
             cursor: pointer;
+            color: var(--text-secondary);
+            transition: background-color 0.1s ease;
+            padding: 8px;
+            border-radius: 8px;
         }
 
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+        .theme-toggle:hover {
+            background-color: var(--surface-secondary);
         }
 
-
-        /* --- Main Content & Form Styles --- */
+        /* Main Content */
         .main-content {
             flex-grow: 1;
-            margin-left: var(--sidebar-width);
+            margin-left: 260px;
             transition: margin-left 0.3s ease-in-out;
-            width: calc(100% - var(--sidebar-width));
+            width: calc(100% - 260px);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 24px;
+            padding: 16px;
         }
 
-        .card {
-            background: var(--white);
-            border: 1px solid var(--gray-200);
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow-lg);
-            overflow: hidden;
-        }
-
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            padding: 24px;
-            border-bottom: 1px solid var(--gray-200);
-            background: linear-gradient(135deg, var(--white) 0%, var(--gray-50) 100%);
-        }
-
-        .header-main {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-        }
-
-        .header-icon {
-            background: var(--indigo-50);
-            color: var(--indigo-600);
-            width: 48px;
-            height: 48px;
-            border-radius: var(--border-radius);
-            display: grid;
-            place-items: center;
-            font-size: 24px;
-            flex-shrink: 0;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .header-content h1 {
-            font-size: 28px;
-            font-weight: 700;
-            margin: 0 0 4px 0;
-            color: var(--gray-900);
-        }
-
-        .sub {
-            color: var(--gray-600);
-            margin: 0;
-            font-size: 16px;
-        }
-
-        /* --- Hamburger Menu & Responsive Toggle --- */
+        /* Hamburger Menu */
         .menu-toggle {
-            display: none; /* Hide the checkbox */
+            display: none;
         }
 
         .hamburger-menu {
-            display: none; /* Hidden by default on large screens */
+            display: none;
             cursor: pointer;
             width: 32px;
             height: 24px;
@@ -243,30 +204,30 @@
             z-index: 1001;
         }
 
-            .hamburger-menu span {
-                display: block;
-                position: absolute;
-                height: 3px;
-                width: 100%;
-                background: var(--gray-800);
-                border-radius: 3px;
-                opacity: 1;
-                left: 0;
-                transform: rotate(0deg);
-                transition: .25s ease-in-out;
-            }
+        .hamburger-menu span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: var(--text-primary);
+            border-radius: 3px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
 
-                .hamburger-menu span:nth-child(1) {
-                    top: 0px;
-                }
+        .hamburger-menu span:nth-child(1) {
+            top: 0px;
+        }
 
-                .hamburger-menu span:nth-child(2), .hamburger-menu span:nth-child(3) {
-                    top: 10px;
-                }
+        .hamburger-menu span:nth-child(2), .hamburger-menu span:nth-child(3) {
+            top: 10px;
+        }
 
-                .hamburger-menu span:nth-child(4) {
-                    top: 20px;
-                }
+        .hamburger-menu span:nth-child(4) {
+            top: 20px;
+        }
 
         #menu-toggle:checked + .page-wrapper .hamburger-menu span:nth-child(1) {
             top: 10px;
@@ -288,6 +249,193 @@
             left: 50%;
         }
 
+        /* Card */
+        .card {
+            background: var(--surface-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .hdr {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-light);
+            background: var(--surface-tertiary);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .badge {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: rgba(25, 195, 125, 0.1);
+            color: var(--accent-main);
+            font-size: 22px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 18px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .sub {
+            margin: 2px 0 0;
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-light);
+            overflow: auto;
+            background: var(--surface-secondary);
+        }
+
+        .tab {
+            appearance: none;
+            border: 1px solid var(--border-light);
+            background: transparent;
+            cursor: pointer;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            transition: all 0.1s ease;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .tab:hover {
+            color: var(--text-primary);
+            background: var(--surface-primary);
+        }
+
+        .tab.active {
+            color: var(--accent-main);
+            background: rgba(25, 195, 125, 0.1);
+            border-color: var(--accent-main);
+        }
+
+        /* Content */
+        .content {
+            padding: 20px;
+            background: var(--surface-secondary);
+        }
+
+        .frameWrap {
+            width: 100%;
+            height: 800px;
+            background: #fff;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* Actions */
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            padding: 16px 20px;
+            border-top: 1px solid var(--border-light);
+            background: var(--surface-tertiary);
+        }
+
+        /* Buttons */
+        .btn {
+            appearance: none;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.1s ease;
+            background: var(--surface-secondary);
+            color: var(--text-primary);
+        }
+
+        .btn:hover {
+            background: var(--surface-primary);
+        }
+
+        .btn.primary {
+            background: var(--accent-main);
+            color: white;
+            border-color: var(--accent-main);
+        }
+
+        .btn.primary:hover {
+            background: var(--accent-hover);
+            border-color: var(--accent-hover);
+        }
+
+        .btn.neutral {
+            background: var(--surface-primary);
+            color: var(--text-primary);
+            border-color: var(--border-medium);
+        }
+
+        .btn.neutral:hover {
+            background: var(--surface-tertiary);
+        }
+
+        .btn.ghost {
+            background: transparent;
+            color: var(--text-secondary);
+            border-color: var(--border-light);
+        }
+
+        .btn.ghost:hover {
+            background: var(--surface-primary);
+            color: var(--text-primary);
+        }
+
+        /* Error */
+        .error {
+            margin: 16px;
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            border-radius: 12px;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 20px 24px;
+        }
+
+        .error h3 {
+            margin: 0 0 8px;
+            color: #fca5a5;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .error p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Responsive */
         @media (max-width: 992px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -307,255 +455,36 @@
             }
         }
 
-
-        /* --- Existing Responsive Styles & Other Tweaks --- */
-        @media (max-width: 768px) {
+        @media(max-width:640px) {
             .container {
-                padding: 16px;
+                padding: 0px;
             }
 
-            .header-content h1 {
-                font-size: 24px;
+            .hdr {
+                flex-direction: row;
+                align-items: center;
             }
 
-            .form-section {
-                padding: 24px;
+            .brand h1 {
+                font-size: 16px;
+            }
+
+            .brand .sub {
+                display: none;
             }
 
             .actions {
-                padding: 20px 24px;
+                justify-content: center;
+            }
+
+            .frameWrap {
+                height: 600px;
             }
         }
 
-        @media (max-width: 640px) {
-            .container {
-                padding: 0;
-            }
-
-            .header {
-                padding: 20px;
-                gap: 12px;
-            }
-
-            .header-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-            }
-
-            .header-content h1 {
-                font-size: 20px;
-            }
-
-            .sub {
-                font-size: 14px;
-            }
-
-            .form-section {
-                padding: 20px;
-            }
-        }
-
-        /* --- Original form component styles (mostly unchanged) --- */
-        .form-section {
-            padding: 16px;
-        }
-
-        .grid {
-            display: grid;
-            gap: 24px;
-            margin-bottom: 32px;
-        }
-
-        .grid-1 {
-            grid-template-columns: 1fr;
-        }
-
-        .grid-2 {
-            grid-template-columns: 1fr;
-        }
-
-        @media (min-width: 640px) {
-            .grid-2 {
-                grid-template-columns: 1fr 1fr;
-                gap: 20px;
-            }
-        }
-
-        .field {
-            display: flex;
-            flex-direction: column;
-        }
-
-            .field label {
-                display: block;
-                font-weight: 600;
-                font-size: 14px;
-                color: var(--gray-700);
-                margin-bottom: 8px;
-                line-height: 1.4;
-            }
-
-        .input, .textarea {
-            width: 100%;
-            border: 1px solid var(--gray-300);
-            border-radius: var(--border-radius);
-            padding: 14px 16px;
-            font-size: 16px;
-            outline: none;
-            transition: all 0.2s ease;
-            background: var(--white);
-            font-family: inherit;
-            color: var(--gray-900);
-        }
-
-            .input:focus, .textarea:focus {
-                border-color: var(--indigo-600);
-                box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-            }
-
-        .textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .section-title {
+        /* Icons using Unicode */
+        .material-symbols-outlined {
             font-size: 20px;
-            font-weight: 700;
-            margin: 0 0 8px 0;
-            color: var(--gray-900);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-            .section-title::before {
-                content: "";
-                width: 4px;
-                height: 20px;
-                background: linear-gradient(135deg, var(--indigo-600), var(--indigo-700));
-                border-radius: 2px;
-            }
-
-        .muted {
-            color: var(--gray-500);
-            font-size: 14px;
-            margin: 0 0 20px 0;
-        }
-
-        .btn {
-            appearance: none;
-            border: 0;
-            cursor: pointer;
-            border-radius: var(--border-radius);
-            padding: 14px 24px;
-            font-weight: 600;
-            font-size: 16px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            font-family: inherit;
-            min-height: 48px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--indigo-600), var(--indigo-700));
-            color: var(--white);
-            box-shadow: var(--shadow-md);
-        }
-
-            .btn-primary:hover {
-                transform: translateY(-1px);
-                box-shadow: var(--shadow-lg);
-            }
-
-        .btn-secondary {
-            background: var(--gray-100);
-            color: var(--gray-700);
-            border: 1px solid var(--gray-300);
-        }
-
-            .btn-secondary:hover {
-                background: var(--gray-200);
-            }
-
-        .actions {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            padding: 24px 32px;
-            border-top: 1px solid var(--gray-200);
-            background: var(--gray-50);
-        }
-
-        .loading {
-            display: none;
-            padding: 60px 32px;
-            text-align: center;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 3px solid var(--gray-200);
-            border-top-color: var(--indigo-600);
-            animation: spin 1s linear infinite;
-            margin: 16px auto;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .loading-text {
-            font-weight: 600;
-            color: var(--gray-700);
-            font-size: 18px;
-            margin-bottom: 8px;
-        }
-
-        .loading-subtext {
-            color: var(--gray-500);
-            font-size: 14px;
-        }
-
-        .error {
-            margin: 24px 32px;
-            padding: 16px 20px;
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            border-left: 4px solid #ef4444;
-            border-radius: var(--border-radius);
-            color: #991b1b;
-        }
-
-        .form-group {
-            margin-bottom: 40px;
-        }
-
-            .form-group:last-child {
-                margin-bottom: 0;
-            }
-
-        .field:focus-within label {
-            color: var(--indigo-600);
-        }
-
-        @media (max-width: 640px) {
-            .actions {
-                padding: 20px;
-                flex-direction: column;
-            }
-
-                .actions .btn {
-                    width: 100%;
-                }
         }
     </style>
 </head>
@@ -566,47 +495,47 @@
             <aside class="sidebar">
                 <div class="sidebar-header">
                     <span class="sidebar-title">My Resumes</span>
-                    <span class="material-symbols-outlined">account_circle</span>
+                    <span class="material-symbols-outlined">👤</span>
                 </div>
 
                 <a href="#" class="new-chat-btn">
-                    <span class="material-symbols-outlined">add</span>
+                    <span>➕</span>
                     New Resume
                 </a>
                 <a href="Home.aspx" class="new-chat-btn">
-                    <span class="material-symbols-outlined">add</span>
+                    <span>➕</span>
                     New Chat
                 </a>
 
                 <nav class="sidebar-nav">
                     <a href="#" class="active">
-                        <span class="material-symbols-outlined">chat_bubble</span>
+                        <span>💬</span>
                         Software Engineer Role
                     </a>
                     <a href="#">
-                        <span class="material-symbols-outlined">chat_bubble</span>
+                        <span>💬</span>
                         Marketing Manager CV
                     </a>
                 </nav>
 
                 <div class="sidebar-footer">
                     <a href="#" class="sidebar-footer-link">
-                        <span class="material-symbols-outlined">workspace_premium</span>
+                        <span>⭐</span>
                         Upgrade
                     </a>
-                    <span class="material-symbols-outlined theme-toggle">light_mode</span>
+                    <span class="theme-toggle">🌙</span>
                 </div>
             </aside>
-
+            
             <main class="main-content">
                 <div class="container">
                     <div class="card">
-                        <div class="header">
-                            <div class="header-main">
-                                <div class="header-icon">📄</div>
-                                <div class="header-content">
-                                    <h1>AI Resume Builder</h1>
-                                    <p class="sub">Enter your details and let AI create a professional resume for you.</p>
+                        <div class="hdr">
+                            <div class="brand">
+                                <div class="badge">📄</div>
+                                <div>
+                                    <h1>Resume Playground</h1>
+                                    <p class="sub">Isolated preview of AI‑generated resume templates</p>
                                 </div>
                             </div>
                             <label for="menu-toggle" class="hamburger-menu">
@@ -617,134 +546,34 @@
                             </label>
                         </div>
 
-                        <div id="resumeFormContainer">
-                            <div class="form-section">
-                                <div class="form-group">
-                                    <div class="grid grid-1">
-                                        <div class="field">
-                                            <label for="txtFullName">Full Name *</label>
-                                            <asp:TextBox ID="txtFullName" runat="server" CssClass="input" placeholder="Enter your full name" />
-                                        </div>
-                                    </div>
+                        <asp:PlaceHolder ID="phError" runat="server" Visible="false">
+                            <div class="error">
+                                <h3>There was a problem</h3>
+                                <p>
+                                    <asp:Literal ID="litError" runat="server" />
+                                </p>
+                                <div style="margin-top: 12px">
+                                    <a class="btn ghost" href="ResumeBuilder.aspx">Go Back and Try Again</a>
                                 </div>
+                            </div>
+                        </asp:PlaceHolder>
 
-                                <div class="form-group">
-                                    <div class="grid grid-2">
-                                        <div class="field">
-                                            <label for="txtEmail">Email Address *</label>
-                                            <asp:TextBox ID="txtEmail" runat="server" CssClass="input" TextMode="Email" placeholder="your.email@example.com" />
-                                        </div>
-                                        <div class="field">
-                                            <label for="txtPhone">Phone Number *</label>
-                                            <asp:TextBox ID="txtPhone" runat="server" CssClass="input" placeholder="+1 (555) 123-4567" />
-                                        </div>
-                                    </div>
+                        <asp:Panel ID="pnlContent" runat="server">
+                            <div class="tabs">
+                                <asp:LinkButton ID="lnkTab1" runat="server" CssClass="tab" OnClick="lnkTab_Click" CommandArgument="1">📘 Modern Professional</asp:LinkButton>
+                                <asp:LinkButton ID="lnkTab2" runat="server" CssClass="tab" OnClick="lnkTab_Click" CommandArgument="2">🎨 Creative Design</asp:LinkButton>
+                                <asp:LinkButton ID="lnkTab3" runat="server" CssClass="tab" OnClick="lnkTab_Click" CommandArgument="3">👔 Executive Classic</asp:LinkButton>
+                            </div>
+
+                            <div class="content">
+                                <div class="frameWrap">
+                                    <asp:Literal ID="litResumeFrame" runat="server" />
                                 </div>
-
-                                <div class="form-group">
-                                    <div class="grid grid-1">
-                                        <div class="field">
-                                            <label for="txtLocation">Location</label>
-                                            <asp:TextBox ID="txtLocation" runat="server" CssClass="input" placeholder="City, State, Country" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Professional Summary -->
-                                <div class="form-group">
-                                    <h3 class="section-title">Professional Summary</h3>
-                                    <p class="muted">Write a brief overview of your experience, key strengths, and career objectives.</p>
-                                    <div class="grid grid-1">
-                                        <div class="field">
-                                            <label for="txtSummary">Summary *</label>
-                                            <asp:TextBox ID="txtSummary" runat="server" CssClass="textarea" TextMode="MultiLine"
-                                                placeholder="Experienced professional with expertise in... Proven track record of... Seeking opportunities to..." />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Work Experience -->
-                                <div class="form-group">
-                                    <h3 class="section-title">Work Experience</h3>
-                                    <p class="muted">Add your most recent work experience to help AI generate relevant content.</p>
-                                    <div class="grid grid-2">
-                                        <div class="field">
-                                            <label for="txtJobTitle">Job Title *</label>
-                                            <asp:TextBox ID="txtJobTitle" runat="server" CssClass="input" placeholder="Senior Software Engineer" />
-                                        </div>
-                                        <div class="field">
-                                            <label for="txtCompany">Company *</label>
-                                            <asp:TextBox ID="txtCompany" runat="server" CssClass="input" placeholder="Tech Solutions Inc." />
-                                        </div>
-                                    </div>
-                                    <div class="grid grid-2">
-                                        <div class="field">
-                                            <label for="txtDuration">Employment Duration *</label>
-                                            <asp:TextBox ID="txtDuration" runat="server" CssClass="input" placeholder="January 2023 - Present" />
-                                        </div>
-                                        <div class="field">
-                                            <label for="txtJobDescription">Key Responsibilities</label>
-                                            <asp:TextBox ID="txtJobDescription" runat="server" CssClass="input"
-                                                placeholder="Led team of 5 developers, implemented new features..." />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Education -->
-                                <div class="form-group">
-                                    <h3 class="section-title">Education</h3>
-                                    <p class="muted">Include your highest level of education or most relevant degree.</p>
-                                    <div class="grid grid-2">
-                                        <div class="field">
-                                            <label for="txtDegree">Degree *</label>
-                                            <asp:TextBox ID="txtDegree" runat="server" CssClass="input" placeholder="Bachelor of Science in Computer Science" />
-                                        </div>
-                                        <div class="field">
-                                            <label for="txtInstitution">Institution *</label>
-                                            <asp:TextBox ID="txtInstitution" runat="server" CssClass="input" placeholder="University of Technology" />
-                                        </div>
-                                    </div>
-                                    <div class="grid grid-2">
-                                        <div class="field">
-                                            <label for="txtGradYear">Graduation Year *</label>
-                                            <asp:TextBox ID="txtGradYear" runat="server" CssClass="input" placeholder="2022" />
-                                        </div>
-                                        <div class="field">
-                                            <label for="txtGPA">GPA / Grade</label>
-                                            <asp:TextBox ID="txtGPA" runat="server" CssClass="input" placeholder="3.8 GPA" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Skills -->
-                                <div class="form-group">
-                                    <h3 class="section-title">Skills</h3>
-                                    <p class="muted">List your key skills separated by commas. Include both technical and soft skills.</p>
-                                    <div class="grid grid-2">
-                                        <div class="field">
-                                            <label for="txtTechnicalSkills">Technical Skills *</label>
-                                            <asp:TextBox ID="txtTechnicalSkills" runat="server" CssClass="input"
-                                                placeholder="JavaScript, Python, React, Node.js, AWS, SQL" />
-                                        </div>
-                                        <div class="field">
-                                            <label for="txtSoftSkills">Soft Skills</label>
-                                            <asp:TextBox ID="txtSoftSkills" runat="server" CssClass="input"
-                                                placeholder="Leadership, Communication, Problem Solving, Team Collaboration" />
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
 
                             <div class="actions">
-                                <asp:Button ID="btnGenerate" runat="server" CssClass="btn btn-primary" Text="✨ Generate AI Resumes" OnClick="btnGenerate_Click" />
-                                <asp:Button ID="btnReset" runat="server" CssClass="btn btn-secondary" Text="🔄 Reset Form" OnClientClick="this.form.reset(); return false;" />
-                            </div>
-                        </div>
-
-                        <asp:Panel ID="pnlError" runat="server" Visible="false">
-                            <div class="error">
-                                <asp:Literal ID="litError" runat="server" />
+                                <asp:Button ID="btnDownload" runat="server" CssClass="btn primary" Text="💾 Download HTML" OnClick="btnDownload_Click" />
+                                <asp:Button ID="btnPrint" runat="server" CssClass="btn neutral" Text="🖨️ Print" OnClick="btnPrint_Click" />
                             </div>
                         </asp:Panel>
                     </div>
