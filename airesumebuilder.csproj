@@ -119,7 +119,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Add_Planes.aspx" />
+    <Content Include="admin\Add_Plans.aspx" />
+    <Content Include="admin\Add_Plan_Features.aspx" />
     <Content Include="App_Data\ai_resume_builder_db.mdf" />
     <Content Include="App_Data\ai_resume_builder_db_log.ldf">
       <DependentUpon>ai_resume_builder_db.mdf</DependentUpon>
@@ -138,17 +139,22 @@
     <Content Include="Register.aspx" />
     <Content Include="ResumeBuilder.aspx" />
     <Content Include="ResumePlayGround.aspx" />
-    <Content Include="temp.aspx" />
-    <Content Include="web-images\login-bg.jpg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Add_Planes.aspx.cs">
-      <DependentUpon>Add_Planes.aspx</DependentUpon>
+    <Compile Include="admin\Add_Plans.aspx.cs">
+      <DependentUpon>Add_Plans.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Add_Planes.aspx.designer.cs">
-      <DependentUpon>Add_Planes.aspx</DependentUpon>
+    <Compile Include="admin\Add_Plans.aspx.designer.cs">
+      <DependentUpon>Add_Plans.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Add_Plan_Features.aspx.cs">
+      <DependentUpon>Add_Plan_Features.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Add_Plan_Features.aspx.designer.cs">
+      <DependentUpon>Add_Plan_Features.aspx</DependentUpon>
     </Compile>
     <Compile Include="AuthHelper.cs" />
     <Compile Include="ChatPlayGround.aspx.cs">
@@ -243,13 +249,6 @@
     </Compile>
     <Compile Include="Site1.Master.designer.cs">
       <DependentUpon>Site1.Master</DependentUpon>
-    </Compile>
-    <Compile Include="temp.aspx.cs">
-      <DependentUpon>temp.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="temp.aspx.designer.cs">
-      <DependentUpon>temp.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

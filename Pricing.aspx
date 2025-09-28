@@ -217,8 +217,10 @@
                                         </asp:Repeater>
                                     </div>
 
-                                    <%-- CTA Button --%>
-                                    <button class="w-full py-3 px-6 rounded-full font-medium cta-button">
+                                    <%-- CTA Button with PlanId --%>
+                                    <button type="button" 
+                                            class="w-full py-3 px-6 rounded-full font-medium cta-button start-trial-btn"
+                                            data-planid='<%# Eval("PlanId") %>'>
                                         Start 7-days Free Trial
                                     </button>
                                 </div>
@@ -235,12 +237,14 @@
         const annualBtn = document.getElementById("annualBtn");
         const monthlyBtn = document.getElementById("monthlyBtn");
         const toggleSlider = document.getElementById("toggleSlider");
+        let isAnnual = true; // default annual
 
         annualBtn.addEventListener("click", function () {
             toggleSlider.style.transform = "translateX(0)";
             annualBtn.classList.add("active");
             monthlyBtn.classList.remove("active");
             updatePrices(true);
+            isAnnual = true;
         });
 
         monthlyBtn.addEventListener("click", function () {
@@ -248,6 +252,7 @@
             monthlyBtn.classList.add("active");
             annualBtn.classList.remove("active");
             updatePrices(false);
+            isAnnual = false;
         });
 
         function updatePrices(isAnnual) {
@@ -266,6 +271,21 @@
                     : "";
             });
         }
+
+        // Redirect on trial button click
+        document.addEventListener("DOMContentLoaded", function () {
+            const buttons = document.querySelectorAll(".start-trial-btn");
+
+            buttons.forEach((btn) => {
+                btn.addEventListener("click", function () {
+                    const planId = this.dataset.planid;
+                    const cycle = isAnnual ? "annual" : "monthly";
+
+                    // Redirect with query params
+                    window.location.href = `Checkout.aspx?planId=${planId}&cycle=${cycle}`;
+                });
+            });
+        });
     </script>
 </body>
 </html>

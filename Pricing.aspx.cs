@@ -99,23 +99,23 @@ namespace airesumebuilder
 
         protected void plansRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
-                DataRowView drv = (DataRowView)e.Item.DataItem;
-                int planId = Convert.ToInt32(drv["PlanID"]);
+            DataRowView drv = (DataRowView)e.Item.DataItem;
+            int planId = Convert.ToInt32(drv["PlanID"]);
 
-                Repeater featuresRepeater = (Repeater)e.Item.FindControl("featuresRepeater");
-                using (SqlConnection con = new SqlConnection(connectionString))
-                {
-                    string query = "SELECT * FROM PlanFeatures WHERE PlanID = @PlanID";
-                    SqlDataAdapter da = new SqlDataAdapter(query, con);
-                    da.SelectCommand.Parameters.AddWithValue("@PlanID", planId);
-                    DataSet ds = new DataSet();
-                    da.Fill(ds);
-                    featuresRepeater.DataSource = ds.Tables[0];
-                    featuresRepeater.DataBind();
-                }
-            }
+            Repeater featuresRepeater = (Repeater)e.Item.FindControl("featuresRepeater");
+
+            SqlConnection con = new SqlConnection(connectionString);
+            con.Open();
+
+            string query = "SELECT * FROM PlanFeatures WHERE PlanID = " + planId;
+            SqlDataAdapter da = new SqlDataAdapter(query, con);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            featuresRepeater.DataSource = ds.Tables[0];
+            featuresRepeater.DataBind();
+
+            con.Close();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace airesumebuilder
         {
             if (page.Session["userLoggedIn"] == null || page.Session["userLoggedIn"].ToString() != "true")
             {
-                string currentUrl = page.Request.Url.AbsolutePath;
+                string currentUrl = page.Request.Url.PathAndQuery;
                 page.Response.Redirect("Login.aspx?ReturnUrl=" + HttpUtility.UrlEncode(currentUrl));
             }
         }
@@ -23,6 +23,21 @@ namespace airesumebuilder
             {
                 page.Response.Redirect("Home.aspx");
             }
+            if (page.Session["userAdminIn"] != null && page.Session["userAdminIn"].ToString() == "true")
+            {
+                page.Response.Redirect("/admin/dashboard.aspx");
+            }
         }
+
+        public static void isAdmin(Page page)
+        {
+            if (page.Session["adminLoggedIn"] == null || page.Session["adminLoggedIn"].ToString() != "true")
+            {
+                string currentUrl = page.Request.Url.PathAndQuery;
+                page.Response.Redirect("/Login.aspx?ReturnUrl=" + HttpUtility.UrlEncode(currentUrl));
+            }
+        }
+
+        
     }
 }

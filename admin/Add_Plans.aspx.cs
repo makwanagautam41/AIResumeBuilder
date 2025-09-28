@@ -8,9 +8,9 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace airesumebuilder
+namespace airesumebuilder.admin
 {
-    public partial class Add_Planes : System.Web.UI.Page
+    public partial class Add_Plans : System.Web.UI.Page
     {
         string connectionString = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
         SqlConnection con;
@@ -32,7 +32,7 @@ namespace airesumebuilder
         protected void addPlanButton_Click(object sender, EventArgs e)
         {
             get_connection();
-            string query = "INSERT INTO Plans (Name, MonthlyPrice, AnnualPrice, OriginalPrice, Description, IsPopular) VALUES ('"+planName.Text+"','"+planMonthlyPrice.Text+"','"+planAnnualPrice.Text+"','"+planOriginalPrice.Text+"','"+planDescription.Text+"','"+planIsPopular.Checked + "')";
+            string query = "INSERT INTO Plans (Name, MonthlyPrice, AnnualPrice, OriginalPrice, Description, IsPopular) VALUES ('" + planName.Text + "','" + planMonthlyPrice.Text + "','" + planAnnualPrice.Text + "','" + planOriginalPrice.Text + "','" + planDescription.Text + "','" + planIsPopular.Checked + "')";
             cmd = new SqlCommand(query, con);
             cmd.ExecuteNonQuery();
         }

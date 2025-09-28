@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Add_Planes.aspx.cs" Inherits="airesumebuilder.Add_Planes" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Add_Plans.aspx.cs" Inherits="airesumebuilder.admin.Add_Plans" %>
 
 <!DOCTYPE html>
 
@@ -18,19 +18,23 @@
                     </tr>
                     <tr>
                         <td>Enter Monthly Price</td>
-                        <td><asp:TextBox ID="planMonthlyPrice" runat="server"></asp:TextBox></td>
+                        <td>
+                            <asp:TextBox ID="planMonthlyPrice" runat="server"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td>Enter Annual Price</td>
-                        <td><asp:TextBox ID="planAnnualPrice" runat="server"></asp:TextBox></td>
+                        <td>
+                            <asp:TextBox ID="planAnnualPrice" runat="server"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td>Enter Original Price</td>
-                        <td><asp:TextBox ID="planOriginalPrice" runat="server"></asp:TextBox></td>
+                        <td>
+                            <asp:TextBox ID="planOriginalPrice" runat="server"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td>Enter Description</td>
-                        <td><asp:TextBox ID="planDescription" runat="server"></asp:TextBox></td>
+                        <td>
+                            <asp:TextBox ID="planDescription" runat="server"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td>Is Popular Plan</td>

@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace airesumebuilder
+namespace airesumebuilder.admin
 {
 
 
-    public partial class Checkout
+    public partial class Add_Plans
     {
 
         /// <summary>
@@ -24,57 +24,66 @@ namespace airesumebuilder
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// lblUserName control.
+        /// planName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUserName;
+        protected global::System.Web.UI.WebControls.TextBox planName;
 
         /// <summary>
-        /// lblUserEmail control.
+        /// planMonthlyPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUserEmail;
+        protected global::System.Web.UI.WebControls.TextBox planMonthlyPrice;
 
         /// <summary>
-        /// lblPlanName control.
+        /// planAnnualPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPlanName;
+        protected global::System.Web.UI.WebControls.TextBox planAnnualPrice;
 
         /// <summary>
-        /// lblDescription control.
+        /// planOriginalPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDescription;
+        protected global::System.Web.UI.WebControls.TextBox planOriginalPrice;
 
         /// <summary>
-        /// lblMonthly control.
+        /// planDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMonthly;
+        protected global::System.Web.UI.WebControls.TextBox planDescription;
 
         /// <summary>
-        /// lblAnnual control.
+        /// planIsPopular control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAnnual;
+        protected global::System.Web.UI.WebControls.CheckBox planIsPopular;
+
+        /// <summary>
+        /// addPlanButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button addPlanButton;
     }
 }

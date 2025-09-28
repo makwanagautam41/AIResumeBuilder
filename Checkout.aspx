@@ -34,6 +34,7 @@
                 opacity: 0;
                 transform: translateY(16px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -66,10 +67,10 @@
             transition: all 0.3s ease;
         }
 
-        .checkout-card:hover {
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            border-color: var(--border-medium);
-        }
+            .checkout-card:hover {
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+                border-color: var(--border-medium);
+            }
 
         .section-title {
             color: var(--text-primary);
@@ -106,15 +107,15 @@
             transition: all 0.3s ease;
         }
 
-        .form-input:focus {
-            border-color: var(--accent-main);
-            box-shadow: 0 0 0 2px rgba(25, 195, 125, 0.2);
-            outline: none;
-        }
+            .form-input:focus {
+                border-color: var(--accent-main);
+                box-shadow: 0 0 0 2px rgba(25, 195, 125, 0.2);
+                outline: none;
+            }
 
-        .form-input::placeholder {
-            color: var(--text-secondary);
-        }
+            .form-input::placeholder {
+                color: var(--text-secondary);
+            }
 
         .summary-item {
             color: var(--text-secondary);
@@ -133,9 +134,9 @@
             transition: color 0.2s ease;
         }
 
-        .promo-link:hover {
-            color: var(--accent-hover);
-        }
+            .promo-link:hover {
+                color: var(--accent-hover);
+            }
 
         .terms-text {
             color: var(--text-secondary);
@@ -149,11 +150,11 @@
             border: none;
         }
 
-        .complete-payment-btn:hover {
-            background-color: var(--accent-hover);
-            transform: scale(1.02);
-            box-shadow: 0 4px 16px rgba(25, 195, 125, 0.3);
-        }
+            .complete-payment-btn:hover {
+                background-color: var(--accent-hover);
+                transform: scale(1.02);
+                box-shadow: 0 4px 16px rgba(25, 195, 125, 0.3);
+            }
 
         .bottom-section {
             background-color: var(--surface-tertiary);
@@ -187,9 +188,9 @@
             border-radius: 4px;
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--border-medium);
-        }
+            ::-webkit-scrollbar-thumb:hover {
+                background: var(--border-medium);
+            }
     </style>
 </head>
 <body class="checkout-container">
@@ -197,14 +198,6 @@
         <div class="min-h-screen">
             <!-- Main Content -->
             <div class="fade-in-up">
-                <!-- Header Section -->
-                <div class="header-section">
-                    <div class="max-w-6xl mx-auto px-4 py-6">
-                        <div class="flex items-center justify-between mb-6">
-                            <h1 class="text-2xl md:text-3xl font-bold main-title">Go Back To Pricing</h1>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Checkout Form -->
                 <div class="max-w-6xl mx-auto px-4 py-8">
@@ -216,27 +209,26 @@
                                 <h3 class="text-lg font-semibold mb-4 section-title">Attendee details:</h3>
                                 <div class="space-y-4">
                                     <div>
-                                        <label class="block text-sm label-text mb-2">Murith Zable</label>
+                                        <div class="flex items-center gap-2 p-3 mb-2 info-box rounded">
+                                            <label class="block text-sm label-text">
+                                                Name:
+                                                <asp:Label ID="lblUserName" runat="server" Text="User Name"></asp:Label>
+                                            </label>
+                                        </div>
                                         <div class="flex items-center gap-2 p-3 info-box rounded">
-                                            <span class="info-icon text-sm">ℹ</span>
-                                            <span class="text-sm">Your ticket will be sent to: murith.zab@gmail.com</span>
+                                            <label class="block text-sm label-text">
+                                                Email: 
+                                                <asp:Label ID="lblUserEmail" runat="server" Text="user@example.com"></asp:Label>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
+
                             <!-- Payment Method -->
                             <div class="checkout-card rounded-lg p-6 transform transition-shadow duration-300">
-                                <h3 class="text-lg font-semibold mb-4 section-title">Select payment method</h3>
-
-                                <!-- Payment Options -->
-                                <div class="flex gap-3 mb-6">
-                                    <div class="p-3 payment-method-card rounded-lg">
-                                        <div class="w-20 h-8 rounded payment-brand flex items-center justify-center text-xs font-bold">
-                                            MASTERCARD ONLY
-                                        </div>
-                                    </div>
-                                </div>
+                                <h3 class="text-lg font-semibold mb-4 section-title">Currently the Card Only Payment is Available</h3>
 
                                 <!-- Form Fields -->
                                 <div class="space-y-4">
@@ -281,28 +273,24 @@
 
                         <!-- Right Column - Summary -->
                         <div class="space-y-6">
-                            <div class="checkout-card rounded-lg p-6 sticky top-4">
-                                <h3 class="text-lg font-semibold mb-4 section-title">Summary</h3>
+                            <div class="checkout-card rounded-lg p-4 sticky top-4">
+                                <h3 class="text-lg font-semibold mb-4 section-title">Summary of Selected Plan   </h3>
 
-                                <div class="space-y-4 mb-6">
-                                    <div>
-                                        <h4 class="font-medium summary-value">Tropical Purple Party</h4>
-                                        <a href="#" class="promo-link text-sm hover:underline">Add Promo Code?</a>
-                                    </div>
-
-                                    <div class="space-y-3">
-                                        <div class="flex justify-between">
-                                            <span class="summary-item">3 x Advance Tickets</span>
-                                            <span class="font-medium summary-value">KES 7,500</span>
+                                <div class="checkout-card rounded-lg p-2 mb-2">
+                                    <div class="space-y-2">
+                                        <div>
+                                            <strong>Plan Name:</strong>
+                                            <asp:Label ID="lblPlanName" runat="server" Text=""></asp:Label>
                                         </div>
-                                        <div class="flex justify-between">
-                                            <span class="summary-item">3 x VVIP Tickets</span>
-                                            <span class="font-medium summary-value">KES 15,500</span>
+                                        <div>
+                                            <strong>Description:</strong>
+                                            <asp:Label ID="lblDescription" runat="server" Text=""></asp:Label>
                                         </div>
-                                        <hr class="divider" />
-                                        <div class="flex justify-between text-lg font-semibold">
-                                            <span class="total-text">Total:</span>
-                                            <span class="total-text">22,500</span>
+                                        <div>
+                                            <strong>Monthly Price:</strong> ₹<asp:Label ID="lblMonthly" runat="server" Text=""></asp:Label>
+                                        </div>
+                                        <div>
+                                            <strong>Annual Price:</strong> ₹<asp:Label ID="lblAnnual" runat="server" Text=""></asp:Label>
                                         </div>
                                     </div>
                                 </div>

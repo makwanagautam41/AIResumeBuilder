@@ -61,6 +61,14 @@ namespace airesumebuilder
                 return;
             }
 
+            if (email == "admin@gmail.com" && password == "123")
+            {
+                Session["adminLoggedIn"] = "true";
+                Session["adminEmail"] = email;
+                Response.Redirect("/admin/dashboard.aspx");
+                return;
+            }
+
             if (check_user_exist(email) == 0)
             {
                 LabelMessage.Text = "User with this email does not exist.";
@@ -68,6 +76,7 @@ namespace airesumebuilder
                 LabelMessage.Parent.Visible = true;
                 return;
             }
+
 
             try
             {
@@ -99,7 +108,7 @@ namespace airesumebuilder
                 }
             }
             catch (Exception ex)
-            {
+            {    
                 LabelMessage.Text = "Error: " + ex.Message;
                 LabelMessage.ForeColor = System.Drawing.Color.Red;
             }
