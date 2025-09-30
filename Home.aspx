@@ -26,6 +26,7 @@
                     <span class="logo-text">MyChat</span>
                 </div>
                 <asp:Button ID="Button1" runat="server" Text="+ New Chat" class="new-chat-btn" OnClick="Button1_Click" />
+                <asp:Button ID="Button2" runat="server" Text="+ New Resume" class="new-chat-btn" OnClick="Button2_Click" />
                 <div class="chat-list">
                     <asp:Repeater ID="ChatRepeater" runat="server" OnItemCommand="ChatRepeater_ItemCommand">
                         <ItemTemplate>

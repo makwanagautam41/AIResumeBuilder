@@ -110,20 +110,20 @@
             text-decoration: none;
         }
 
-        .new-chat-btn:hover {
-            background-color: var(--surface-secondary);
-            color: var(--text-primary);
-            text-decoration: none;
-        }
+            .new-chat-btn:hover {
+                background-color: var(--surface-secondary);
+                color: var(--text-primary);
+                text-decoration: none;
+            }
 
-        .new-chat-btn:before {
-            content: "";
-            width: 16px;
-            height: 16px;
-            background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%23ffffff'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M12 4.5v15m7.5-7.5h-15'/%3e%3c/svg%3e") no-repeat center;
-            background-size: contain;
-            flex-shrink: 0;
-        }
+            .new-chat-btn:before {
+                content: "";
+                width: 16px;
+                height: 16px;
+                background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%23ffffff'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M12 4.5v15m7.5-7.5h-15'/%3e%3c/svg%3e") no-repeat center;
+                background-size: contain;
+                flex-shrink: 0;
+            }
 
         /* Chat List */
         .sidebar-nav {
@@ -132,51 +132,51 @@
             padding: 8px 0;
         }
 
-        .sidebar-nav::-webkit-scrollbar {
-            width: 8px;
-        }
+            .sidebar-nav::-webkit-scrollbar {
+                width: 8px;
+            }
 
-        .sidebar-nav::-webkit-scrollbar-track {
-            background: transparent;
-        }
+            .sidebar-nav::-webkit-scrollbar-track {
+                background: transparent;
+            }
 
-        .sidebar-nav::-webkit-scrollbar-thumb {
-            background: var(--border-light);
-            border-radius: 4px;
-        }
+            .sidebar-nav::-webkit-scrollbar-thumb {
+                background: var(--border-light);
+                border-radius: 4px;
+            }
 
-        .sidebar-nav a {
-            display: flex;
-            align-items: center;
-            margin: 2px 14px;
-            border: none;
-            justify-content: flex-start;
-            padding: 12px 14px;
-            background-color: transparent;
-            position: relative;
-            color: var(--text-primary);
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.1s ease;
-        }
+            .sidebar-nav a {
+                display: flex;
+                align-items: center;
+                margin: 2px 14px;
+                border: none;
+                justify-content: flex-start;
+                padding: 12px 14px;
+                background-color: transparent;
+                position: relative;
+                color: var(--text-primary);
+                text-decoration: none;
+                border-radius: 8px;
+                transition: all 0.1s ease;
+            }
 
-        .sidebar-nav a:hover {
-            background-color: var(--surface-secondary);
-        }
+                .sidebar-nav a:hover {
+                    background-color: var(--surface-secondary);
+                }
 
-        .sidebar-nav a.active {
-            background-color: var(--surface-secondary);
-        }
+                .sidebar-nav a.active {
+                    background-color: var(--surface-secondary);
+                }
 
-        .sidebar-nav a:before {
-            content: "";
-            width: 16px;
-            height: 16px;
-            background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='%23ffffff'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z'/%3e%3c/svg%3e") no-repeat center;
-            background-size: contain;
-            margin-right: 8px;
-            flex-shrink: 0;
-        }
+                .sidebar-nav a:before {
+                    content: "";
+                    width: 16px;
+                    height: 16px;
+                    background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='%23ffffff'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z'/%3e%3c/svg%3e") no-repeat center;
+                    background-size: contain;
+                    margin-right: 8px;
+                    flex-shrink: 0;
+                }
 
         /* Sidebar Footer */
         .sidebar-footer {
@@ -199,10 +199,10 @@
             transition: background-color 0.1s ease;
         }
 
-        .sidebar-footer-link:hover {
-            background-color: var(--surface-secondary);
-            color: var(--text-primary);
-        }
+            .sidebar-footer-link:hover {
+                background-color: var(--surface-secondary);
+                color: var(--text-primary);
+            }
 
         .theme-toggle {
             padding: 8px;
@@ -213,9 +213,9 @@
             transition: background-color 0.1s ease;
         }
 
-        .theme-toggle:hover {
-            background-color: var(--surface-secondary);
-        }
+            .theme-toggle:hover {
+                background-color: var(--surface-secondary);
+            }
 
         /* Mobile Navbar */
         .navbar {
@@ -228,48 +228,48 @@
             justify-content: space-between;
         }
 
-        .navbar .hamburger {
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+            .navbar .hamburger {
+                width: 24px;
+                height: 24px;
+                cursor: pointer;
+                background: none;
+                border: none;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
 
-        .navbar .hamburger span {
-            display: block;
-            position: absolute;
-            height: 3px;
-            width: 20px;
-            background: var(--text-primary);
-            border-radius: 3px;
-            opacity: 1;
-            left: 0;
-            transform: rotate(0deg);
-            transition: .25s ease-in-out;
-        }
+                .navbar .hamburger span {
+                    display: block;
+                    position: absolute;
+                    height: 3px;
+                    width: 20px;
+                    background: var(--text-primary);
+                    border-radius: 3px;
+                    opacity: 1;
+                    left: 0;
+                    transform: rotate(0deg);
+                    transition: .25s ease-in-out;
+                }
 
-        .navbar .hamburger span:nth-child(1) {
-            top: 0px;
-        }
+                    .navbar .hamburger span:nth-child(1) {
+                        top: 0px;
+                    }
 
-        .navbar .hamburger span:nth-child(2), .navbar .hamburger span:nth-child(3) {
-            top: 8px;
-        }
+                    .navbar .hamburger span:nth-child(2), .navbar .hamburger span:nth-child(3) {
+                        top: 8px;
+                    }
 
-        .navbar .hamburger span:nth-child(4) {
-            top: 16px;
-        }
+                    .navbar .hamburger span:nth-child(4) {
+                        top: 16px;
+                    }
 
-        .navbar span.title {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
+            .navbar span.title {
+                font-size: 16px;
+                font-weight: 600;
+                color: var(--text-primary);
+            }
 
         /* Main Content */
         .main-content {
@@ -296,18 +296,18 @@
             padding: 32px 0;
         }
 
-        .header h1 {
-            font-size: 28px;
-            font-weight: 400;
-            color: var(--text-primary);
-            margin-bottom: 16px;
-        }
+            .header h1 {
+                font-size: 28px;
+                font-weight: 400;
+                color: var(--text-primary);
+                margin-bottom: 16px;
+            }
 
-        .header .sub {
-            color: var(--text-secondary);
-            font-size: 16px;
-            line-height: 1.6;
-        }
+            .header .sub {
+                color: var(--text-secondary);
+                font-size: 16px;
+                line-height: 1.6;
+            }
 
         /* Form Sections */
         .form-section {
@@ -328,13 +328,13 @@
             gap: 8px;
         }
 
-        .section-title::before {
-            content: "";
-            width: 3px;
-            height: 16px;
-            background: var(--accent-main);
-            border-radius: 2px;
-        }
+            .section-title::before {
+                content: "";
+                width: 3px;
+                height: 16px;
+                background: var(--accent-main);
+                border-radius: 2px;
+            }
 
         .muted {
             color: var(--text-secondary);
@@ -369,14 +369,14 @@
             flex-direction: column;
         }
 
-        .field label {
-            display: block;
-            font-weight: 500;
-            font-size: 14px;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
+            .field label {
+                display: block;
+                font-weight: 500;
+                font-size: 14px;
+                color: var(--text-primary);
+                margin-bottom: 8px;
+                line-height: 1.4;
+            }
 
         .input, .textarea {
             width: 100%;
@@ -391,14 +391,14 @@
             color: var(--text-primary);
         }
 
-        .input:focus, .textarea:focus {
-            border-color: var(--accent-main);
-            box-shadow: 0 0 0 1px var(--accent-main);
-        }
+            .input:focus, .textarea:focus {
+                border-color: var(--accent-main);
+                box-shadow: 0 0 0 1px var(--accent-main);
+            }
 
-        .input::placeholder, .textarea::placeholder {
-            color: var(--text-secondary);
-        }
+            .input::placeholder, .textarea::placeholder {
+                color: var(--text-secondary);
+            }
 
         .textarea {
             min-height: 100px;
@@ -426,9 +426,9 @@
             color: var(--text-primary);
         }
 
-        .btn:hover {
-            background: var(--surface-primary);
-        }
+            .btn:hover {
+                background: var(--surface-primary);
+            }
 
         .btn-primary {
             background: var(--accent-main);
@@ -436,10 +436,10 @@
             border-color: var(--accent-main);
         }
 
-        .btn-primary:hover {
-            background: var(--accent-hover);
-            border-color: var(--accent-hover);
-        }
+            .btn-primary:hover {
+                background: var(--accent-hover);
+                border-color: var(--accent-hover);
+            }
 
         .actions {
             display: flex;
@@ -523,9 +523,9 @@
                 margin-bottom: 32px;
             }
 
-            .header h1 {
-                font-size: 24px;
-            }
+                .header h1 {
+                    font-size: 24px;
+                }
 
             .actions {
                 flex-direction: column;
@@ -555,10 +555,43 @@
             .overlay {
                 display: none !important;
             }
+
             .navbar {
                 display: none !important;
             }
         }
+
+        .sidebar-header .img-div {
+            display: flex;
+            align-items: center;
+        }
+
+            .sidebar-header .img-div a {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                text-decoration: none;
+                color: var(--text-primary);
+                padding: 8px;
+                border-radius: 8px;
+                transition: background-color 0.1s ease;
+            }
+
+                .sidebar-header .img-div a:hover {
+                    background-color: var(--surface-secondary);
+                }
+
+            .sidebar-header .img-div img {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
+            .sidebar-header .img-div span {
+                font-size: 14px;
+                font-weight: 500;
+            }
     </style>
 </head>
 <body>
@@ -583,10 +616,14 @@
             <!-- Sidebar -->
             <aside class="sidebar">
                 <div class="sidebar-header">
-                    <span class="sidebar-title">My Resumes</span>
-                    <div class="user-icon">U</div>
+                    <div class="img-div">
+                        <a href="Profile.aspx">
+                            <img src="https://res.cloudinary.com/djbqtwzyf/image/upload/v1744042607/default_img_gszetk.png" alt="MyChat Logo" class="logo-img" />
+                            <span>Profile</span>
+                        </a>
+                    </div>
+                    <span class="logo-text">MyChat</span>
                 </div>
-
                 <a href="#" class="new-chat-btn">
                     New Resume
                 </a>
@@ -595,18 +632,14 @@
                 </a>
 
                 <nav class="sidebar-nav">
-                    <a href="#" class="active">
-                        Software Engineer Role
+                    <a href="#" class="active">Software Engineer Role
                     </a>
-                    <a href="#">
-                        Marketing Manager CV
+                    <a href="#">Marketing Manager CV
                     </a>
                 </nav>
 
                 <div class="sidebar-footer">
-                    <a href="#" class="sidebar-footer-link">
-                        <span>⭐</span>
-                        Upgrade
+                    <a href="Pricing.aspx" class="sidebar-footer-link">Upgrade
                     </a>
                     <span class="theme-toggle">🌙</span>
                 </div>

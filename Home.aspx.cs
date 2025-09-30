@@ -163,5 +163,10 @@ namespace airesumebuilder
                 LoadChatSessions();
             }
         }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ResumeBuilder.aspx");
+        }
     }
 }

@@ -92,52 +92,52 @@
             font-size: 14px;
         }
 
-        .new-chat-btn:hover {
-            background-color: var(--surface-secondary);
-            color: var(--text-primary);
-            text-decoration: none;
-        }
+            .new-chat-btn:hover {
+                background-color: var(--surface-secondary);
+                color: var(--text-primary);
+                text-decoration: none;
+            }
 
         .sidebar-nav {
             flex-grow: 1;
             overflow-y: auto;
         }
 
-        .sidebar-nav::-webkit-scrollbar {
-            width: 8px;
-        }
+            .sidebar-nav::-webkit-scrollbar {
+                width: 8px;
+            }
 
-        .sidebar-nav::-webkit-scrollbar-track {
-            background: transparent;
-        }
+            .sidebar-nav::-webkit-scrollbar-track {
+                background: transparent;
+            }
 
-        .sidebar-nav::-webkit-scrollbar-thumb {
-            background: var(--border-light);
-            border-radius: 4px;
-        }
+            .sidebar-nav::-webkit-scrollbar-thumb {
+                background: var(--border-light);
+                border-radius: 4px;
+            }
 
-        .sidebar-nav a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            margin-bottom: 8px;
-            border-radius: 8px;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.1s ease;
-        }
+            .sidebar-nav a {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 12px 16px;
+                margin-bottom: 8px;
+                border-radius: 8px;
+                color: var(--text-primary);
+                text-decoration: none;
+                font-weight: 500;
+                transition: all 0.1s ease;
+            }
 
-        .sidebar-nav a:hover {
-            background-color: var(--surface-secondary);
-            color: var(--text-primary);
-        }
+                .sidebar-nav a:hover {
+                    background-color: var(--surface-secondary);
+                    color: var(--text-primary);
+                }
 
-        .sidebar-nav a.active {
-            background-color: var(--surface-secondary);
-            color: var(--text-primary);
-        }
+                .sidebar-nav a.active {
+                    background-color: var(--surface-secondary);
+                    color: var(--text-primary);
+                }
 
         .sidebar-footer {
             border-top: 1px solid var(--border-light);
@@ -159,10 +159,10 @@
             transition: all 0.1s ease;
         }
 
-        .sidebar-footer-link:hover {
-            background-color: var(--surface-secondary);
-            color: var(--text-primary);
-        }
+            .sidebar-footer-link:hover {
+                background-color: var(--surface-secondary);
+                color: var(--text-primary);
+            }
 
         .theme-toggle {
             cursor: pointer;
@@ -172,9 +172,9 @@
             border-radius: 8px;
         }
 
-        .theme-toggle:hover {
-            background-color: var(--surface-secondary);
-        }
+            .theme-toggle:hover {
+                background-color: var(--surface-secondary);
+            }
 
         /* Main Content */
         .main-content {
@@ -204,30 +204,30 @@
             z-index: 1001;
         }
 
-        .hamburger-menu span {
-            display: block;
-            position: absolute;
-            height: 3px;
-            width: 100%;
-            background: var(--text-primary);
-            border-radius: 3px;
-            opacity: 1;
-            left: 0;
-            transform: rotate(0deg);
-            transition: .25s ease-in-out;
-        }
+            .hamburger-menu span {
+                display: block;
+                position: absolute;
+                height: 3px;
+                width: 100%;
+                background: var(--text-primary);
+                border-radius: 3px;
+                opacity: 1;
+                left: 0;
+                transform: rotate(0deg);
+                transition: .25s ease-in-out;
+            }
 
-        .hamburger-menu span:nth-child(1) {
-            top: 0px;
-        }
+                .hamburger-menu span:nth-child(1) {
+                    top: 0px;
+                }
 
-        .hamburger-menu span:nth-child(2), .hamburger-menu span:nth-child(3) {
-            top: 10px;
-        }
+                .hamburger-menu span:nth-child(2), .hamburger-menu span:nth-child(3) {
+                    top: 10px;
+                }
 
-        .hamburger-menu span:nth-child(4) {
-            top: 20px;
-        }
+                .hamburger-menu span:nth-child(4) {
+                    top: 20px;
+                }
 
         #menu-toggle:checked + .page-wrapper .hamburger-menu span:nth-child(1) {
             top: 10px;
@@ -322,16 +322,16 @@
             font-size: 14px;
         }
 
-        .tab:hover {
-            color: var(--text-primary);
-            background: var(--surface-primary);
-        }
+            .tab:hover {
+                color: var(--text-primary);
+                background: var(--surface-primary);
+            }
 
-        .tab.active {
-            color: var(--accent-main);
-            background: rgba(25, 195, 125, 0.1);
-            border-color: var(--accent-main);
-        }
+            .tab.active {
+                color: var(--accent-main);
+                background: rgba(25, 195, 125, 0.1);
+                border-color: var(--accent-main);
+            }
 
         /* Content */
         .content {
@@ -377,41 +377,41 @@
             color: var(--text-primary);
         }
 
-        .btn:hover {
-            background: var(--surface-primary);
-        }
+            .btn:hover {
+                background: var(--surface-primary);
+            }
 
-        .btn.primary {
-            background: var(--accent-main);
-            color: white;
-            border-color: var(--accent-main);
-        }
+            .btn.primary {
+                background: var(--accent-main);
+                color: white;
+                border-color: var(--accent-main);
+            }
 
-        .btn.primary:hover {
-            background: var(--accent-hover);
-            border-color: var(--accent-hover);
-        }
+                .btn.primary:hover {
+                    background: var(--accent-hover);
+                    border-color: var(--accent-hover);
+                }
 
-        .btn.neutral {
-            background: var(--surface-primary);
-            color: var(--text-primary);
-            border-color: var(--border-medium);
-        }
+            .btn.neutral {
+                background: var(--surface-primary);
+                color: var(--text-primary);
+                border-color: var(--border-medium);
+            }
 
-        .btn.neutral:hover {
-            background: var(--surface-tertiary);
-        }
+                .btn.neutral:hover {
+                    background: var(--surface-tertiary);
+                }
 
-        .btn.ghost {
-            background: transparent;
-            color: var(--text-secondary);
-            border-color: var(--border-light);
-        }
+            .btn.ghost {
+                background: transparent;
+                color: var(--text-secondary);
+                border-color: var(--border-light);
+            }
 
-        .btn.ghost:hover {
-            background: var(--surface-primary);
-            color: var(--text-primary);
-        }
+                .btn.ghost:hover {
+                    background: var(--surface-primary);
+                    color: var(--text-primary);
+                }
 
         /* Error */
         .error {
@@ -423,17 +423,17 @@
             padding: 20px 24px;
         }
 
-        .error h3 {
-            margin: 0 0 8px;
-            color: #fca5a5;
-            font-size: 16px;
-            font-weight: 600;
-        }
+            .error h3 {
+                margin: 0 0 8px;
+                color: #fca5a5;
+                font-size: 16px;
+                font-weight: 600;
+            }
 
-        .error p {
-            color: var(--text-secondary);
-            margin: 0;
-        }
+            .error p {
+                color: var(--text-secondary);
+                margin: 0;
+            }
 
         /* Responsive */
         @media (max-width: 992px) {
@@ -486,6 +486,38 @@
         .material-symbols-outlined {
             font-size: 20px;
         }
+
+        .sidebar-header .img-div {
+            display: flex;
+            align-items: center;
+        }
+
+            .sidebar-header .img-div a {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                text-decoration: none;
+                color: var(--text-primary);
+                padding: 8px;
+                border-radius: 8px;
+                transition: background-color 0.1s ease;
+            }
+
+                .sidebar-header .img-div a:hover {
+                    background-color: var(--surface-secondary);
+                }
+
+            .sidebar-header .img-div img {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
+            .sidebar-header .img-div span {
+                font-size: 14px;
+                font-weight: 500;
+            }
     </style>
 </head>
 <body>
@@ -494,17 +526,17 @@
         <div class="page-wrapper">
             <aside class="sidebar">
                 <div class="sidebar-header">
-                    <span class="sidebar-title">My Resumes</span>
-                    <span class="material-symbols-outlined">👤</span>
+                    <div class="img-div">
+                        <a href="Profile.aspx">
+                            <img src="https://res.cloudinary.com/djbqtwzyf/image/upload/v1744042607/default_img_gszetk.png" alt="MyChat Logo" class="logo-img" />
+                            <span>Profile</span>
+                        </a>
+                    </div>
+                    <span class="logo-text">MyChat</span>
                 </div>
-
-                <a href="#" class="new-chat-btn">
-                    <span>➕</span>
-                    New Resume
+                <a href="#" class="new-chat-btn"> + New Resume
                 </a>
-                <a href="Home.aspx" class="new-chat-btn">
-                    <span>➕</span>
-                    New Chat
+                <a href="Home.aspx" class="new-chat-btn"> + New Chat
                 </a>
 
                 <nav class="sidebar-nav">
@@ -519,14 +551,12 @@
                 </nav>
 
                 <div class="sidebar-footer">
-                    <a href="#" class="sidebar-footer-link">
-                        <span>⭐</span>
-                        Upgrade
+                    <a href="Pricing.aspx" class="sidebar-footer-link">Upgrade
                     </a>
                     <span class="theme-toggle">🌙</span>
                 </div>
             </aside>
-            
+
             <main class="main-content">
                 <div class="container">
                     <div class="card">

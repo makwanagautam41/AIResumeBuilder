@@ -1,90 +1,42 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Web;
-//using System.Web.UI;
-//using System.Web.UI.WebControls;
-//using System.Configuration;
-//using System.Data;
-//using System.Data.SqlClient;
-
-//namespace airesumebuilder
-//{
-//    public partial class Pricing : System.Web.UI.Page
-//    {
-//        string connectionString = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
-//        SqlConnection con;
-//        SqlDataAdapter da;
-//        DataSet ds;
-//        SqlCommand cmd;
-
-//        protected void Page_Load(object sender, EventArgs e)
-//        {
-
-//            get_connection();
-//            if (!IsPostBack)
-//            {
-//                get_plans();
-//            }
-
-
-//        }
-
-//        void get_connection()
-//        {
-//            con = new SqlConnection(connectionString);
-//            con.Open();
-//        }
-
-//        void get_plans()
-//        {
-//            get_connection();
-//            string query = "SELECT * FROM Plans";
-//            da = new SqlDataAdapter(query, con);
-//            ds = new DataSet();
-//            da.Fill(ds);
-//            plansRepeater.DataSource = ds.Tables[0];
-//            plansRepeater.DataBind();
-//        }
-
-//        void get_features_for_plan(int planId)
-//        {
-//            get_connection();
-//            string query = "SELECT * FROM PlanFeatures WHERE PlanId = " + planId;
-//            da = new SqlDataAdapter(query, con);
-//            ds = new DataSet();
-//            da.Fill(ds);
-//            featuresRepeater.DataSource = ds.Tables[0];
-//            featuresRepeater.DataBind();
-//        }
-//    }
-//}
-
+﻿using Stripe;
+using Stripe.Checkout;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web.Services;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace airesumebuilder
 {
-    public partial class Pricing : System.Web.UI.Page
+    public partial class Pricing : Page
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+        private readonly string connectionString = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                get_plans();
+                StripeConfiguration.ApiKey = ConfigurationManager.AppSettings["StripeSecretKey"];
+                LoadPlans();
+
+                // Show active plan only if user is logged in
+                if (Session["UserId"] != null)
+                {
+                    int userId = Convert.ToInt32(Session["UserId"]);
+                    ShowActivePlan();
+                }
+                else
+                {
+                    lblActivePlan.Visible = false; // hide if not logged in
+                }
             }
+
         }
 
-        void get_plans()
+        private void LoadPlans()
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -92,6 +44,7 @@ namespace airesumebuilder
                 SqlDataAdapter da = new SqlDataAdapter(query, con);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
+
                 plansRepeater.DataSource = ds.Tables[0];
                 plansRepeater.DataBind();
             }
@@ -99,23 +52,123 @@ namespace airesumebuilder
 
         protected void plansRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            DataRowView drv = (DataRowView)e.Item.DataItem;
-            int planId = Convert.ToInt32(drv["PlanID"]);
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                DataRowView drv = (DataRowView)e.Item.DataItem;
+                int planId = Convert.ToInt32(drv["PlanID"]);
 
-            Repeater featuresRepeater = (Repeater)e.Item.FindControl("featuresRepeater");
+                Repeater featuresRepeater = (Repeater)e.Item.FindControl("featuresRepeater");
 
-            SqlConnection con = new SqlConnection(connectionString);
-            con.Open();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT * FROM PlanFeatures WHERE PlanID = @PlanID";
+                    SqlDataAdapter da = new SqlDataAdapter(query, con);
+                    da.SelectCommand.Parameters.AddWithValue("@PlanID", planId);
 
-            string query = "SELECT * FROM PlanFeatures WHERE PlanID = " + planId;
-            SqlDataAdapter da = new SqlDataAdapter(query, con);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
+                    DataSet ds = new DataSet();
+                    da.Fill(ds);
 
-            featuresRepeater.DataSource = ds.Tables[0];
-            featuresRepeater.DataBind();
-
-            con.Close();
+                    featuresRepeater.DataSource = ds.Tables[0];
+                    featuresRepeater.DataBind();
+                }
+            }
         }
+
+        private void ShowActivePlan()
+        {
+            // Check if user is logged in
+            if (Session["UserId"] == null)
+            {
+                lblActivePlan.Visible = false;
+                return;
+            }
+
+            int userId = Convert.ToInt32(Session["UserId"]);
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string query = @"
+            SELECT Plan_Id, Selected_Cycle
+            FROM User_Planes_tbl
+            WHERE User_Id = @UserId AND IsActive = 1"; // fetch active plan
+
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@UserId", userId);
+
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    int planId = Convert.ToInt32(reader["Plan_Id"]);
+                    string cycle = reader["Selected_Cycle"].ToString(); // monthly/annual
+
+                    lblActivePlan.Text = $"Your Active Plan ID: {planId} ({cycle})";
+                    lblActivePlan.Visible = true;
+                }
+                else
+                {
+                    lblActivePlan.Visible = false; // no active plan
+                }
+            }
+        }
+
+
+
+        [WebMethod]
+        public static object CreateCheckoutSession(int planId, string cycle)
+        {
+            StripeConfiguration.ApiKey = ConfigurationManager.AppSettings["StripeSecretKey"];
+
+            string connectionString = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+            string planName = "";
+            decimal amount = 0;
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string query = "SELECT Name, MonthlyPrice, AnnualPrice FROM Plans WHERE PlanID=@PlanID";
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@PlanID", planId);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    planName = reader["Name"].ToString();
+                    amount = cycle == "annual" ? Convert.ToDecimal(reader["AnnualPrice"]) : Convert.ToDecimal(reader["MonthlyPrice"]);
+                }
+            }
+
+            long amountInPaise = (long)(amount * 100);
+
+            var options = new SessionCreateOptions
+            {
+                PaymentMethodTypes = new List<string> { "card" },
+                LineItems = new List<SessionLineItemOptions>
+        {
+            new SessionLineItemOptions
+            {
+                PriceData = new SessionLineItemPriceDataOptions
+                {
+                    Currency = "inr",
+                    UnitAmount = amountInPaise,
+                    ProductData = new SessionLineItemPriceDataProductDataOptions
+                    {
+                        Name = planName,
+                    },
+                },
+                Quantity = 1,
+            },
+        },
+                Mode = "payment",
+                SuccessUrl = "https://localhost:44301/Success.aspx?planId=" + planId + "&cycle=" + cycle + "&session_id={CHECKOUT_SESSION_ID}",
+                CancelUrl = "https://localhost:44301/Cancel.aspx",
+            };
+
+            var service = new SessionService();
+            Session session = service.Create(options);
+
+            return new { id = session.Id };
+        }
+
     }
 }

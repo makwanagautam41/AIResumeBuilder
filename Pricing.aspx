@@ -40,10 +40,10 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
-        .pricing-card:hover {
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            border-color: var(--border-medium);
-        }
+            .pricing-card:hover {
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+                border-color: var(--border-medium);
+            }
 
         .toggle-container {
             background-color: var(--surface-secondary);
@@ -59,9 +59,9 @@
             transition: color 0.3s ease;
         }
 
-        .toggle-btn.active {
-            color: var(--text-primary);
-        }
+            .toggle-btn.active {
+                color: var(--text-primary);
+            }
 
         .popular-badge {
             background-color: var(--accent-main);
@@ -112,11 +112,11 @@
             transition: all 0.2s ease;
         }
 
-        .cta-button:hover {
-            background-color: var(--accent-main);
-            border-color: var(--accent-main);
-            box-shadow: 0 4px 16px rgba(25, 195, 125, 0.3);
-        }
+            .cta-button:hover {
+                background-color: var(--accent-main);
+                border-color: var(--accent-main);
+                box-shadow: 0 4px 16px rgba(25, 195, 125, 0.3);
+            }
 
         .main-title {
             color: var(--text-primary);
@@ -136,9 +136,9 @@
             border-radius: 4px;
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--border-medium);
-        }
+            ::-webkit-scrollbar-thumb:hover {
+                background: var(--border-medium);
+            }
     </style>
 </head>
 <body>
@@ -162,6 +162,8 @@
                             </button>
                         </div>
                     </div>
+                    <asp:Label ID="lblActivePlan" runat="server" CssClass="text-green-500 font-bold mb-4 block" Visible="false"></asp:Label>
+
 
                     <!-- Pricing Cards Grid -->
                     <div id="pricingGrid" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -231,6 +233,33 @@
             </div>
         </div>
     </form>
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <script>
+        const stripe = Stripe("<%= System.Configuration.ConfigurationManager.AppSettings["StripePublishableKey"] %>");
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const buttons = document.querySelectorAll(".start-trial-btn");
+
+            buttons.forEach((btn) => {
+                btn.addEventListener("click", function () {
+                    const planId = this.dataset.planid;
+                    const cycle = isAnnual ? "annual" : "monthly";
+
+                    fetch("Pricing.aspx/CreateCheckoutSession", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ planId: planId, cycle: cycle })
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            stripe.redirectToCheckout({ sessionId: data.d.id });
+                        })
+                        .catch(err => console.error(err));
+                });
+            });
+        });
+    </script>
 
     <script>
         // Toggle functionality
@@ -273,19 +302,19 @@
         }
 
         // Redirect on trial button click
-        document.addEventListener("DOMContentLoaded", function () {
-            const buttons = document.querySelectorAll(".start-trial-btn");
+        //document.addEventListener("DOMContentLoaded", function () {
+        //    const buttons = document.querySelectorAll(".start-trial-btn");
 
-            buttons.forEach((btn) => {
-                btn.addEventListener("click", function () {
-                    const planId = this.dataset.planid;
-                    const cycle = isAnnual ? "annual" : "monthly";
+        //    buttons.forEach((btn) => {
+        //        btn.addEventListener("click", function () {
+        //            const planId = this.dataset.planid;
+        //            const cycle = isAnnual ? "annual" : "monthly";
 
-                    // Redirect with query params
-                    window.location.href = `Checkout.aspx?planId=${planId}&cycle=${cycle}`;
-                });
-            });
-        });
+        //            // Redirect with query params
+        //            window.location.href = `Checkout.aspx?planId=${planId}&cycle=${cycle}`;
+        //        });
+        //    });
+        //});
     </script>
 </body>
 </html>
