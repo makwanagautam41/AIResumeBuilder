@@ -40,8 +40,6 @@
             </div>
             <div class="sidebar-footer">
                 <a href="Pricing.aspx" style="text-decoration:none;"><span>Upgrade</span></a>
-                <label for="theme-toggle-checkbox" class="theme-toggle" title="Toggle theme">
-                    🌙</label>
             </div>
         </aside>
 

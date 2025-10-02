@@ -39,8 +39,8 @@
 
             <!-- Buttons -->
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="Login.aspx"
-                    class="px-6 py-3 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition">Go to Login
+                <a href="Home.aspx"
+                    class="px-6 py-3 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition">Go to Home
                 </a>
                 <a href="Pricing.aspx"
                     class="px-6 py-3 bg-gray-200 text-gray-800 rounded-lg shadow hover:bg-gray-300 transition">Back to Pricing

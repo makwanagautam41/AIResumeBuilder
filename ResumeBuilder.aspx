@@ -624,24 +624,34 @@
                     </div>
                     <span class="logo-text">MyChat</span>
                 </div>
-                <a href="#" class="new-chat-btn">
-                    New Resume
+                <a href="#" class="new-chat-btn">New Resume
                 </a>
-                <a href="Home.aspx" class="new-chat-btn">
-                    New Chat
+                <a href="Home.aspx" class="new-chat-btn">New Chat
                 </a>
 
                 <nav class="sidebar-nav">
-                    <a href="#" class="active">Software Engineer Role
-                    </a>
-                    <a href="#">Marketing Manager CV
-                    </a>
+                    <asp:Repeater ID="ResumeRepeater" runat="server" OnItemCommand="ResumeRepeater_ItemCommand">
+                        <ItemTemplate>
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-right: 5px;">
+                                <a href='<%# "ResumePlayGround.aspx?id=" + Eval("ResumeId") %>'>
+                                    <%# string.Format("{0:dd MMM yyyy, hh:mm}", Eval("CreatedAt")) %>
+                                </a>
+                                <asp:Button ID="DeleteBtn" runat="server"
+                                    Style="padding: 4px; background-color: red; color: #fff; border-radius: 5px; height: 30px; cursor: pointer;"
+                                    Text="Delete" CommandName="DeleteResume" CommandArgument='<%# Eval("ResumeId") %>'
+                                     />
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                    <asp:PlaceHolder ID="EmptyState" runat="server" Visible="false">
+                        <a href="#" class="active">No resumes yet</a>
+                    </asp:PlaceHolder>
                 </nav>
+
 
                 <div class="sidebar-footer">
                     <a href="Pricing.aspx" class="sidebar-footer-link">Upgrade
                     </a>
-                    <span class="theme-toggle">🌙</span>
                 </div>
             </aside>
 

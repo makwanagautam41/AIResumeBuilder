@@ -18,6 +18,7 @@
             --border-medium: #565869;
             --accent-main: #19c37d;
             --accent-hover: #0fa968;
+            --accent-orange: #ff9500;
         }
 
         body, html {
@@ -68,6 +69,17 @@
             color: var(--text-primary);
         }
 
+        .active-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-primary);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .purchased-badge {
+            background-color: var(--accent-orange);
+            color: var(--text-primary);
+        }
+
         .plan-title {
             color: var(--text-primary);
         }
@@ -112,10 +124,22 @@
             transition: all 0.2s ease;
         }
 
-            .cta-button:hover {
+            .cta-button:hover:not(:disabled) {
                 background-color: var(--accent-main);
                 border-color: var(--accent-main);
                 box-shadow: 0 4px 16px rgba(25, 195, 125, 0.3);
+            }
+
+            .cta-button.activate-btn:hover:not(:disabled) {
+                background-color: var(--accent-orange);
+                border-color: var(--accent-orange);
+                box-shadow: 0 4px 16px rgba(255, 149, 0, 0.3);
+            }
+
+            .cta-button:disabled {
+                background-color: var(--border-light);
+                cursor: not-allowed;
+                opacity: 0.6;
             }
 
         .main-title {
@@ -153,11 +177,15 @@
 
                         <!-- Toggle buttons -->
                         <div class="relative flex items-center toggle-container rounded-full p-1">
-                            <div id="toggleSlider" class="absolute left-1 w-20 h-8 toggle-slider rounded-full transition-transform duration-300 transform"></div>
-                            <button type="button" id="annualBtn" class="relative z-10 px-4 py-2 text-sm font-medium rounded-full transition-colors duration-300 toggle-btn active">
+                            <div id="toggleSlider" 
+                                 class="absolute left-1 w-20 h-8 toggle-slider rounded-full transition-transform duration-300 transform translate-x-full">
+                            </div>
+                            <button type="button" id="annualBtn" 
+                                    class="relative z-10 px-4 py-2 text-sm font-medium rounded-full transition-colors duration-300 toggle-btn">
                                 Annual
                             </button>
-                            <button type="button" id="monthlyBtn" class="relative z-10 px-4 py-2 text-sm font-medium rounded-full transition-colors duration-300 toggle-btn">
+                            <button type="button" id="monthlyBtn" 
+                                    class="relative z-10 px-4 py-2 text-sm font-medium rounded-full transition-colors duration-300 toggle-btn active">
                                 Monthly
                             </button>
                         </div>
@@ -171,10 +199,14 @@
                             <ItemTemplate>
                                 <div class='relative pricing-card rounded-3xl p-8 transition-all duration-300'>
 
-                                    <%-- Popular Badge --%>
-                                    <%# Convert.ToBoolean(Eval("IsPopular")) 
-                                        ? "<div class='absolute -top-3 right-6'><span class=\"popular-badge px-3 py-1 rounded-full text-xs font-medium\">Popular</span></div>" 
-                                        : "" %>
+                                    <%-- Badge Section - Priority: Active > Purchased > Popular --%>
+                                    <%# Convert.ToBoolean(Eval("IsActivePlan")) 
+                                        ? "<div class='absolute -top-3 right-6'><span class=\"active-badge px-3 py-1 rounded-full text-xs font-medium\">Active Plan</span></div>" 
+                                        : Convert.ToBoolean(Eval("IsPurchased")) 
+                                            ? "<div class='absolute -top-3 right-6'><span class=\"purchased-badge px-3 py-1 rounded-full text-xs font-medium\">Purchased</span></div>"
+                                            : Convert.ToBoolean(Eval("IsPopular")) 
+                                                ? "<div class='absolute -top-3 right-6'><span class=\"popular-badge px-3 py-1 rounded-full text-xs font-medium\">Popular</span></div>" 
+                                                : "" %>
 
                                     <%-- Plan Header --%>
                                     <div class="mb-6">
@@ -189,7 +221,7 @@
                                                   data-annual="<%# Eval("AnnualPrice") %>">
                                                 ₹<%# Eval("MonthlyPrice") %>
                                             </span>
-                                            <span class="ml-1 text-sm period-text period">/ month</span>
+                                            <span class="ml-1 text-sm period-text period periodType"></span>
                                         </div>
 
                                         <p class="text-xs mb-4 billed-text billed">
@@ -219,12 +251,12 @@
                                         </asp:Repeater>
                                     </div>
 
-                                    <%-- CTA Button with PlanId --%>
-                                    <button type="button" 
-                                            class="w-full py-3 px-6 rounded-full font-medium cta-button start-trial-btn"
-                                            data-planid='<%# Eval("PlanId") %>'>
-                                        Start 7-days Free Trial
-                                    </button>
+                                    <%-- CTA Button - Three States: Current Plan / Activate Plan / Start Trial --%>
+                                    <%# Convert.ToBoolean(Eval("IsActivePlan")) 
+                                        ? "<button type='button' class='w-full py-3 px-6 rounded-full font-medium cta-button' disabled>Current Plan</button>"
+                                        : Convert.ToBoolean(Eval("IsPurchased"))
+                                            ? "<button type='button' class='w-full py-3 px-6 rounded-full font-medium cta-button activate-btn' data-planid='" + Eval("PlanID") + "' onclick='activatePlan(" + Eval("PlanID") + ")'>Activate Plan</button>"
+                                            : "<button type='button' class='w-full py-3 px-6 rounded-full font-medium cta-button start-trial-btn' data-planid='" + Eval("PlanID") + "'>Start 7-days Free Trial</button>" %>
                                 </div>
                             </ItemTemplate>
                         </asp:Repeater>
@@ -238,6 +270,33 @@
     <script>
         const stripe = Stripe("<%= System.Configuration.ConfigurationManager.AppSettings["StripePublishableKey"] %>");
 
+        // Activate Plan Function
+        function activatePlan(planId) {
+            if (!confirm("Are you sure you want to activate this plan? Your current active plan will be deactivated.")) {
+                return;
+            }
+
+            fetch("Pricing.aspx/ActivatePlan", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ planId: planId })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.d.success) {
+                        alert("Plan activated successfully!");
+                        location.reload();
+                    } else {
+                        alert("Error: " + data.d.message);
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert("An error occurred. Please try again.");
+                });
+        }
+
+        // Start Trial / Purchase Plan Function
         document.addEventListener("DOMContentLoaded", function () {
             const buttons = document.querySelectorAll(".start-trial-btn");
 
@@ -262,12 +321,34 @@
     </script>
 
     <script>
-        // Toggle functionality
         const annualBtn = document.getElementById("annualBtn");
         const monthlyBtn = document.getElementById("monthlyBtn");
         const toggleSlider = document.getElementById("toggleSlider");
-        let isAnnual = true; // default annual
+        let isAnnual = false; // ✅ default monthly
 
+        // Update prices
+        function updatePrices(isAnnual) {
+            const prices = document.querySelectorAll(".price");
+            const billeds = document.querySelectorAll(".billed");
+
+            prices.forEach((price) => {
+                const value = isAnnual ? price.dataset.annual : price.dataset.monthly;
+                price.innerText = "₹" + value;
+            });
+
+            billeds.forEach((billed) => {
+                const priceEl = billed.previousElementSibling.querySelector(".price");
+                billed.innerText = isAnnual
+                    ? "₹" + priceEl.dataset.annual + " billed yearly"
+                    : "";
+            });
+
+            document.querySelectorAll(".period").forEach(el => {
+                el.textContent = isAnnual ? "/annual" : "/monthly";
+            });
+        }
+
+        // Toggle buttons
         annualBtn.addEventListener("click", function () {
             toggleSlider.style.transform = "translateX(0)";
             annualBtn.classList.add("active");
@@ -284,37 +365,10 @@
             isAnnual = false;
         });
 
-        function updatePrices(isAnnual) {
-            const prices = document.querySelectorAll(".price");
-            const billeds = document.querySelectorAll(".billed");
-
-            prices.forEach((price) => {
-                const value = isAnnual ? price.dataset.annual : price.dataset.monthly;
-                price.innerText = "₹" + value;
-            });
-
-            billeds.forEach((billed) => {
-                const priceEl = billed.previousElementSibling.querySelector(".price");
-                billed.innerText = isAnnual
-                    ? "₹" + priceEl.dataset.annual + " billed yearly"
-                    : "";
-            });
-        }
-
-        // Redirect on trial button click
-        //document.addEventListener("DOMContentLoaded", function () {
-        //    const buttons = document.querySelectorAll(".start-trial-btn");
-
-        //    buttons.forEach((btn) => {
-        //        btn.addEventListener("click", function () {
-        //            const planId = this.dataset.planid;
-        //            const cycle = isAnnual ? "annual" : "monthly";
-
-        //            // Redirect with query params
-        //            window.location.href = `Checkout.aspx?planId=${planId}&cycle=${cycle}`;
-        //        });
-        //    });
-        //});
+        // ✅ Run on load (default monthly)
+        document.addEventListener("DOMContentLoaded", function () {
+            updatePrices(false);
+        });
     </script>
 </body>
 </html>

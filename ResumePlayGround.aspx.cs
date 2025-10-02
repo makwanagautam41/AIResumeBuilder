@@ -34,6 +34,7 @@ namespace airesumebuilder
 
             userId = Convert.ToInt32(Session["UserId"]);
             userEmail = Session["userEmail"].ToString();
+            LoadUserResumes();
 
             if (!IsPostBack)
             {
@@ -59,6 +60,36 @@ namespace airesumebuilder
 
                 Resumes = EnsureNonEmpty(arr);
                 BindActive();
+            }
+        }
+
+        private void LoadUserResumes()
+        {
+            var cs = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+            using (var con = new SqlConnection(cs))
+            using (var cmd = new SqlCommand(@"
+        SELECT ResumeId, CreatedAt
+        FROM GeneratedResumes
+        WHERE UserId = @UserId
+        ORDER BY CreatedAt DESC, ResumeId DESC;", con))
+            {
+                cmd.Parameters.AddWithValue("@UserId", userId);
+                con.Open();
+                using (var rdr = cmd.ExecuteReader())
+                {
+                    if (rdr.HasRows)
+                    {
+                        ResumeRepeater.DataSource = rdr;
+                        ResumeRepeater.DataBind();
+                        EmptyState.Visible = false;
+                    }
+                    else
+                    {
+                        ResumeRepeater.DataSource = null;
+                        ResumeRepeater.DataBind();
+                        EmptyState.Visible = true;
+                    }
+                }
             }
         }
 

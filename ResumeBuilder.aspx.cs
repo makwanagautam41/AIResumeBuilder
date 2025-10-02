@@ -10,6 +10,9 @@ namespace airesumebuilder
 {
     public partial class ResumeBuilder : System.Web.UI.Page
     {
+        string connectionString = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+        SqlConnection con;
+
         int userId;
         string userEmail;
         protected void Page_Load(object sender, EventArgs e)
@@ -18,6 +21,16 @@ namespace airesumebuilder
 
             userId = Convert.ToInt32(Session["UserId"]);
             userEmail = Session["userEmail"].ToString();
+            if (!IsPostBack)
+            {
+                LoadUserResumes();
+            }
+        }
+
+        void get_connection()
+        {
+            con = new SqlConnection(connectionString);
+            con.Open();
         }
 
         protected void btnGenerate_Click(object sender, EventArgs e)
@@ -70,6 +83,64 @@ namespace airesumebuilder
                 }
             }
         }
+
+        private void LoadUserResumes()
+        {
+            var cs = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+            using (var con = new SqlConnection(cs))
+            using (var cmd = new SqlCommand(@"
+        SELECT ResumeId, CreatedAt
+        FROM GeneratedResumes
+        WHERE UserId = @UserId
+        ORDER BY CreatedAt DESC, ResumeId DESC;", con))
+            {
+                cmd.Parameters.AddWithValue("@UserId", userId);
+                con.Open();
+                using (var rdr = cmd.ExecuteReader())
+                {
+                    if (rdr.HasRows)
+                    {
+                        ResumeRepeater.DataSource = rdr;
+                        ResumeRepeater.DataBind();
+                        EmptyState.Visible = false;
+                    }
+                    else
+                    {
+                        ResumeRepeater.DataSource = null;
+                        ResumeRepeater.DataBind();
+                        EmptyState.Visible = true;
+                    }
+                }
+            }
+        }
+
+        protected void ResumeRepeater_ItemCommand(object source, System.Web.UI.WebControls.RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "DeleteResume")
+            {
+                if (int.TryParse(e.CommandArgument.ToString(), out int resumeId))
+                {
+                    DeleteResume(resumeId);
+                    LoadUserResumes();
+                }
+            }
+        }
+
+        private void DeleteResume(int resumeId)
+        {
+            var cs = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+            using (var con = new SqlConnection(cs))
+            using (var cmd = new SqlCommand(@"
+        DELETE FROM GeneratedResumes
+        WHERE ResumeId = @ResumeId AND UserId = @UserId;", con))
+            {
+                cmd.Parameters.AddWithValue("@ResumeId", resumeId);
+                cmd.Parameters.AddWithValue("@UserId", userId);
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
 
         //private int SaveResumesToDatabase(string html1, string html2, string html3)
         //{

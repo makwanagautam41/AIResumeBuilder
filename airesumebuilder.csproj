@@ -142,6 +142,7 @@
     <Content Include="App_Data\ai_resume_builder_db_log.ldf">
       <DependentUpon>ai_resume_builder_db.mdf</DependentUpon>
     </Content>
+    <Content Include="Cancel.aspx" />
     <Content Include="ChatPlayGround.aspx" />
     <Content Include="Checkout.aspx" />
     <Content Include="css\index.css" />
@@ -175,6 +176,13 @@
       <DependentUpon>Add_Plan_Features.aspx</DependentUpon>
     </Compile>
     <Compile Include="AuthHelper.cs" />
+    <Compile Include="Cancel.aspx.cs">
+      <DependentUpon>Cancel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cancel.aspx.designer.cs">
+      <DependentUpon>Cancel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ChatPlayGround.aspx.cs">
       <DependentUpon>ChatPlayGround.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

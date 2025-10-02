@@ -534,26 +534,28 @@
                     </div>
                     <span class="logo-text">MyChat</span>
                 </div>
-                <a href="#" class="new-chat-btn"> + New Resume
+                <a href="ResumeBuilder.aspx" class="new-chat-btn">+ New Resume
                 </a>
-                <a href="Home.aspx" class="new-chat-btn"> + New Chat
+                <a href="Home.aspx" class="new-chat-btn">+ New Chat
                 </a>
 
                 <nav class="sidebar-nav">
-                    <a href="#" class="active">
-                        <span>💬</span>
-                        Software Engineer Role
-                    </a>
-                    <a href="#">
-                        <span>💬</span>
-                        Marketing Manager CV
-                    </a>
+                    <asp:Repeater ID="ResumeRepeater" runat="server">
+                        <ItemTemplate>
+                            <a href='<%# "ResumePlayGround.aspx?id=" + Eval("ResumeId") %>'>
+                                <%# string.Format("{0:dd MMM yyyy, hh:mm tt}", Eval("CreatedAt")) %>
+                            </a>
+                        </ItemTemplate>
+                    </asp:Repeater>
+
+                    <asp:PlaceHolder ID="EmptyState" runat="server" Visible="false">
+                        <a href="#" class="active">No resumes yet</a>
+                    </asp:PlaceHolder>
                 </nav>
 
                 <div class="sidebar-footer">
                     <a href="Pricing.aspx" class="sidebar-footer-link">Upgrade
                     </a>
-                    <span class="theme-toggle">🌙</span>
                 </div>
             </aside>
 
