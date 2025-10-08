@@ -45,7 +45,6 @@ namespace airesumebuilder
             {
                 return 1;
             }
-            con.Close();
             return 0;
         }
 
@@ -111,10 +110,6 @@ namespace airesumebuilder
             {    
                 LabelMessage.Text = "Error: " + ex.Message;
                 LabelMessage.ForeColor = System.Drawing.Color.Red;
-            }
-            finally
-            {
-                con.Close();
             }
         }
     }

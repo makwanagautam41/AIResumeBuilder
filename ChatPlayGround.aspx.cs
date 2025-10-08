@@ -77,7 +77,6 @@ namespace airesumebuilder
                 sb.AppendLine("User: " + dr["Prompt"].ToString());
                 sb.AppendLine("AI: " + dr["Response"].ToString());
             }
-            con.Close();
 
             return sb.ToString();
         }
@@ -106,7 +105,6 @@ namespace airesumebuilder
         //                    <div class='bubble'>{aiMsg}</div>
         //                </div>");
         //    }
-        //    con.Close();
 
         //    chatFeed.InnerHtml = sb.ToString();
         //}
@@ -124,7 +122,6 @@ namespace airesumebuilder
             if (!dr.HasRows)
             {
                 dr.Close();
-                con.Close();
                 Response.Redirect("Home.aspx");
                 return;
             }
@@ -147,7 +144,6 @@ namespace airesumebuilder
                 <div class='bubble'>{formattedAiMsg}</div>
             </div>");
             }
-            con.Close();
 
             chatFeed.InnerHtml = sb.ToString();
         }
@@ -163,7 +159,6 @@ namespace airesumebuilder
             string query = "INSERT INTO chat_messages (ChatId, UserId, Prompt, Response, CreatedAt) VALUES ('" + chatId + "','" + userId + "','" + prompt + "','" + response + "',GETDATE())";
             SqlCommand cmd = new SqlCommand(query, con);
             cmd.ExecuteNonQuery();
-            con.Close();
         }
 
         private void LoadChatSessions()
@@ -177,7 +172,6 @@ namespace airesumebuilder
             ChatRepeater.DataSource = dr;
             ChatRepeater.DataBind();
 
-            con.Close();
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -202,7 +196,6 @@ namespace airesumebuilder
                 SqlCommand cmd2 = new SqlCommand(deleteSession, con);
                 cmd2.ExecuteNonQuery();
 
-                con.Close();
                 Response.Redirect("Home.aspx");
 
                 LoadChatSessions();

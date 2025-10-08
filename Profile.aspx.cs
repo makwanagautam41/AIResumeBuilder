@@ -36,7 +36,6 @@ namespace airesumebuilder
             String email = Session["userEmail"].ToString();
             get_user_details(email);
 
-            con.Close();
         }
 
 

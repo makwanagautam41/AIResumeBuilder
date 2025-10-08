@@ -10,7 +10,6 @@
     <form id="form1" runat="server">
         <div>
             <center>
-                <!-- Add Feature Form -->
                 <table border="1" cellpadding="5">
                     <tr>
                         <td>Select Plan</td>
@@ -47,7 +46,6 @@
 
                 <br />
 
-                <!-- Feature List -->
                 <asp:GridView ID="gvFeatures" runat="server" AutoGenerateColumns="False"
                     DataKeyNames="FeatureID"
                     OnRowDeleting="gvFeatures_RowDeleting"

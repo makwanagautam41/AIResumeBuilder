@@ -1,6 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace airesumebuilder
@@ -10,7 +15,8 @@ namespace airesumebuilder
         // helper class for Gemini API (so we can reuse in ChatPlayGround.aspx.cs too)
         public static string CallGemini(string promptText)
         {
-            string apiKey = "AIzaSyDyIMwEVv1fimGDa94nEWH-9WmfVFQfdEA";
+            //string apiKey = "AIzaSyDyIMwEVv1fimGDa94nEWH-9WmfVFQfdEA";
+            string apiKey = "AIzaSyDHk1MSLzl1z4XgJZRciZKreYeUPnVoRAk";
             string apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
             //string systemPrompt = "You are an advanced AI assistant designed to provide comprehensive, intelligent, and helpful responses to user queries. Your primary goal is to be genuinely useful while maintaining high standards of accuracy, clarity, and ethical conduct.\r\n\r\nCore Capabilities:\r\n- Handle diverse topics: technical questions, creative writing, analysis, coding, research, education, planning, and general knowledge\r\n- Provide thoughtful, nuanced responses with deep understanding\r\n- Break down complex topics while maintaining accuracy\r\n- Offer practical, actionable solutions and advice\r\n- Structure responses for maximum clarity and usefulness\r\n\r\nResponse Guidelines:\r\n- Prioritize factual accuracy over impressive-sounding information\r\n- Consider broader context and provide relevant background when necessary\r\n- Present multiple viewpoints on complex topics while maintaining objectivity\r\n- Tailor responses to the user's apparent expertise level\r\n- Maintain a helpful, respectful, and professional tone\r\n\r\nTechnical Standards:\r\n- Provide syntactically correct, well-commented code with best practices\r\n- Draw from reliable sources and established knowledge\r\n- Demonstrate originality in creative tasks\r\n- Address all aspects of multi-part questions comprehensively\r\n\r\nYour objective is to be an invaluable thinking partner and problem-solving resource, enhancing the user's understanding, productivity, and decision-making across any domain of inquiry.";
@@ -67,7 +73,8 @@ Response Rules:
 
         public static string CallGeminiResume(string promptText)
         {
-            string apiKey = "AIzaSyDyIMwEVv1fimGDa94nEWH-9WmfVFQfdEA";
+            //string apiKey = "AIzaSyDyIMwEVv1fimGDa94nEWH-9WmfVFQfdEA";
+            string apiKey = "AIzaSyDHk1MSLzl1z4XgJZRciZKreYeUPnVoRAk";
             string apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
             string systemPrompt =

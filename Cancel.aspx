@@ -10,7 +10,6 @@
 <body>
     <form id="form1" runat="server" class="w-full">
         <div class="max-w-xl mx-auto bg-white rounded-2xl shadow-lg p-10 text-center">
-            <!-- Cancel Icon -->
             <div class="flex justify-center mb-6">
                 <svg class="w-20 h-20 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -18,17 +17,14 @@
                 </svg>
             </div>
 
-            <!-- Title -->
             <h1 class="text-3xl font-bold text-gray-800 mb-4">Payment Cancelled ❌</h1>
 
-            <!-- Details -->
             <p class="text-gray-600 mb-6">
                 Your subscription process was <span class="font-semibold">not completed</span>.
                 No charges were made to your account. You can retry the payment anytime via 
                 <span class="font-semibold">Pricing page</span>.
             </p>
 
-            <!-- Next Steps -->
             <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-left mb-6">
                 <h2 class="font-semibold text-red-700 mb-2">What you can do next?</h2>
                 <ul class="list-disc list-inside text-red-700 space-y-1">
@@ -38,7 +34,6 @@
                 </ul>
             </div>
 
-            <!-- Buttons -->
             <div class="flex flex-col sm:flex-row justify-center gap-4">
                 <a href="Pricing.aspx"
                     class="px-6 py-3 bg-red-600 text-white rounded-lg shadow hover:bg-red-700 transition">Retry Payment

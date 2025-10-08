@@ -14,6 +14,7 @@ namespace airesumebuilder.admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            AuthHelper.isAdmin(this);
             if (!IsPostBack)
             {
                 get_connection();
@@ -35,7 +36,6 @@ namespace airesumebuilder.admin
             ddlPlans.DataTextField = "Name";
             ddlPlans.DataValueField = "PlanID";
             ddlPlans.DataBind();
-            con.Close();
 
             ddlPlans.Items.Insert(0, new ListItem("-- Select Plan --", "0"));
         }
@@ -70,7 +70,6 @@ namespace airesumebuilder.admin
             string query = "INSERT INTO PlanFeatures (PlanID, FeatureName, IsIncluded) VALUES ('" + ddlPlans.SelectedValue + "','" + feature_name.Text + "','" + chkIsIncluded.Checked + "')";
             SqlCommand cmd = new SqlCommand(query, con);
             cmd.ExecuteNonQuery();
-            con.Close();
 
             lblMessage.Text = "Feature added successfully!";
             lblMessage.ForeColor = System.Drawing.Color.Green;
@@ -94,7 +93,6 @@ namespace airesumebuilder.admin
 
             SqlCommand cmd = new SqlCommand("DELETE FROM PlanFeatures WHERE FeatureID='"+featureId+"'", con);
             cmd.ExecuteNonQuery();
-            con.Close();
 
             LoadFeatures();
         }

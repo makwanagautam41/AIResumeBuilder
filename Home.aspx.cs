@@ -44,8 +44,6 @@ namespace airesumebuilder
 
             ChatRepeater.DataSource = dr;
             ChatRepeater.DataBind();
-
-            con.Close();
         }
 
         protected void Submit_Click(object sender, EventArgs e)
@@ -133,7 +131,6 @@ namespace airesumebuilder
             string query = "INSERT INTO chat_messages (ChatId, UserId, Prompt, Response, CreatedAt) VALUES ('" + chatId + "','" + userId + "','" + prompt + "','" + response + "',GETDATE())";
             SqlCommand cmd = new SqlCommand(query, con);
             cmd.ExecuteNonQuery();
-            con.Close();
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -157,8 +154,6 @@ namespace airesumebuilder
                 string deleteSession = "DELETE FROM chat_sessions WHERE ChatId='" + chatId + "'";
                 SqlCommand cmd2 = new SqlCommand(deleteSession, con);
                 cmd2.ExecuteNonQuery();
-
-                con.Close();
 
                 LoadChatSessions();
             }

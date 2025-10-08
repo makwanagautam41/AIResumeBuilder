@@ -115,7 +115,6 @@ namespace airesumebuilder
             }
 
             rd.Close();
-            con.Close();
 
             return result;
         }
@@ -156,7 +155,7 @@ namespace airesumebuilder
                      + html + "</body></html>";
             }
 
-            // Render iframe via Literal - Fixed the height issue
+            // Render iframe via Literal
             litResumeFrame.Text = $"<iframe srcdoc=\"{HttpUtility.HtmlAttributeEncode(html)}\" " +
                                   "style='width:100%;height:800px;border:0;' " +
                                   "sandbox='allow-same-origin allow-scripts allow-popups allow-forms'></iframe>";
