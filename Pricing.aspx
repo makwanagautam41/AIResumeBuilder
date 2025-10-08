@@ -324,7 +324,7 @@
         const annualBtn = document.getElementById("annualBtn");
         const monthlyBtn = document.getElementById("monthlyBtn");
         const toggleSlider = document.getElementById("toggleSlider");
-        let isAnnual = false; // ✅ default monthly
+        let isAnnual = false; // default monthly
 
         // Update prices
         function updatePrices(isAnnual) {
@@ -365,7 +365,7 @@
             isAnnual = false;
         });
 
-        // ✅ Run on load (default monthly)
+        // Run on load
         document.addEventListener("DOMContentLoaded", function () {
             updatePrices(false);
         });
