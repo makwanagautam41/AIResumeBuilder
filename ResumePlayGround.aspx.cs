@@ -10,8 +10,6 @@ namespace airesumebuilder
     {
         int userId;
         string userEmail;
-        string connectionString = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
-        SqlConnection con;
         private string[] Resumes
         {
             get { return ViewState["Resumes"] as string[]; }
@@ -30,16 +28,9 @@ namespace airesumebuilder
             set { ViewState["ResumeId"] = value; }
         }
 
-        void get_connection()
-        {
-            con = new SqlConnection(connectionString);
-            con.Open();
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             AuthHelper.RequireLogin(this);
-            get_connection();
 
             userId = Convert.ToInt32(Session["UserId"]);
             userEmail = Session["userEmail"].ToString();
@@ -72,34 +63,40 @@ namespace airesumebuilder
             }
         }
 
-        //this method is used for showing the sidebar history of past created resumes
         private void LoadUserResumes()
         {
-            get_connection();
-
-            string query = "SELECT ResumeId, CreatedAt FROM GeneratedResumes WHERE UserId = '" + userId + "' ORDER BY CreatedAt DESC, ResumeId DESC";
-
-            SqlCommand cmd = new SqlCommand(query, con);
-            SqlDataReader rdr = cmd.ExecuteReader();
-
-            if (rdr.HasRows)
+            var cs = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+            using (var con = new SqlConnection(cs))
+            using (var cmd = new SqlCommand(@"
+        SELECT ResumeId, CreatedAt
+        FROM GeneratedResumes
+        WHERE UserId = @UserId
+        ORDER BY CreatedAt DESC, ResumeId DESC;", con))
             {
-                ResumeRepeater.DataSource = rdr;
-                ResumeRepeater.DataBind();
-                EmptyState.Visible = false;
-            }
-            else
-            {
-                ResumeRepeater.DataSource = null;
-                ResumeRepeater.DataBind();
-                EmptyState.Visible = true;
+                cmd.Parameters.AddWithValue("@UserId", userId);
+                con.Open();
+                using (var rdr = cmd.ExecuteReader())
+                {
+                    if (rdr.HasRows)
+                    {
+                        ResumeRepeater.DataSource = rdr;
+                        ResumeRepeater.DataBind();
+                        EmptyState.Visible = false;
+                    }
+                    else
+                    {
+                        ResumeRepeater.DataSource = null;
+                        ResumeRepeater.DataBind();
+                        EmptyState.Visible = true;
+                    }
+                }
             }
         }
 
-        //this method is used for showing the resumes content based on the resumeId from the query string
         private string[] LoadResumes(int resumeId)
         {
-            get_connection();
+            string cs = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+            SqlConnection con = new SqlConnection(cs);
             SqlCommand cmd = new SqlCommand("SELECT ResumeHtml1, ResumeHtml2, ResumeHtml3 FROM GeneratedResumes WHERE ResumeId='" + resumeId + "'", con);
 
             con.Open();
