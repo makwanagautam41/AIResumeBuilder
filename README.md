@@ -21,6 +21,7 @@ This is an AI-powered resume builder web application built with ASP.NET. It allo
 * **Database**: Microsoft SQL Server
 * **Frontend**: HTML, CSS, JavaScript
 * **AI**: Google Gemini API
+* **Payment Gateway**: Stripe Test Account
 ### Libraries & Packages
 ```
 Markdig              - Markdown to HTML conversion
