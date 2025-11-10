@@ -1,4 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Success.aspx.cs" Inherits="airesumebuilder.Success" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Async="true" CodeBehind="Success.aspx.cs" Inherits="airesumebuilder.Success" %>
+
+<%@ Register Assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
 
 <!DOCTYPE html>
 
@@ -46,6 +48,16 @@
                     class="px-6 py-3 bg-gray-200 text-gray-800 rounded-lg shadow hover:bg-gray-300 transition">Back to Pricing
                 </a>
             </div>
+
+            <asp:Button ID="ButtonDownload" runat="server" Text="Download PDF Invoice" 
+            CssClass="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700" 
+            OnClick="ButtonDownload_Click" />
+
+        <div class="mt-6 border-t pt-4">
+            <CR:CrystalReportViewer ID="crystalReportViewer1" runat="server" 
+                AutoDataBind="true" HasExportButton="true" HasPrintButton="true"
+                ToolPanelView="None" BestFitPage="True" />
+        </div>
         </div>
     </form>
 </body>

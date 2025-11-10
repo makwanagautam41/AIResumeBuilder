@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Newtonsoft.Json;
 
 namespace airesumebuilder
 {
@@ -79,6 +80,17 @@ namespace airesumebuilder
             try
             {
                 cmd.ExecuteNonQuery();
+
+                string subject = "Welcome to AIRESUMEBUILDER 🎉";
+                string html = $@"
+                <h2>Hello {name},</h2>
+                <p>Welcome to <strong>AIRESUMEBUILDER</strong>!</p>
+                <p>Your account has been successfully created. You can now log in and start building your professional resume.</p>
+                <br/>
+                <p>Cheers,<br/>The AIRESUMEBUILDER Team</p>";
+
+                AuthHelper.SendEmailAsync(email, subject, html);
+
                 Session["successMessage"] = "Registration successfull!";
                 Response.Redirect("Login.aspx");
             }
