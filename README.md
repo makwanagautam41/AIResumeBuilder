@@ -12,6 +12,8 @@ This is an AI-powered resume builder web application built with ASP.NET. It allo
 * **Interactive Chatbot**:
     * A chatbot powered by the Gemini API to assist users.
     * Maintains conversation history for each chat session.
+* **AI Headshot Generator**:
+    * An AI will take your image and converts into an professional HEADSHOT to use in professional places.
 * **User Profile Management**: Users can view and edit their profile information.
 * **Subscription Plans**: The application includes functionality for creating and managing subscription plans for users and used STRIPE payment gateway.
 
@@ -27,6 +29,7 @@ This is an AI-powered resume builder web application built with ASP.NET. It allo
 Markdig              - Markdown to HTML conversion
 Newtonsoft.Json      - JSON serialization/deserialization
 Stripe.net           - Payment processing
+Google GEMINI AI     - Generate image,text & resumes
 ```
 
 ### Setup Installation
@@ -73,6 +76,14 @@ Stripe.net           - Payment processing
      <add key="StripePublishableKey" value="YOUR_STRIPE_PUBLISHABLE_KEY" />
    </appSettings>
    ```
+   **Headshot Genrate keys** (Web.config):
+    > Setup the GEMINI new api key only for local use and this API key is only valid that the email is set up with google billing otherwise the api key will not be valid
+   ```xml
+   <appSettings>
+	  <add key="GEMINI_API_KEY" value="YOUR_GEMINI_API_KEY_ONLY_BILLING_SET_UPED_EMAIL_API_KEY" />
+   </appSettings>
+   ```
+
 
 7. **Build the Solution**
    ```
