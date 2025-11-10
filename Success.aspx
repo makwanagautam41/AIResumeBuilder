@@ -49,15 +49,7 @@
                 </a>
             </div>
 
-            <asp:Button ID="ButtonDownload" runat="server" Text="Download PDF Invoice" 
-            CssClass="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700" 
-            OnClick="ButtonDownload_Click" />
-
-        <div class="mt-6 border-t pt-4">
-            <CR:CrystalReportViewer ID="crystalReportViewer1" runat="server" 
-                AutoDataBind="true" HasExportButton="true" HasPrintButton="true"
-                ToolPanelView="None" BestFitPage="True" />
-        </div>
+            
         </div>
     </form>
 </body>
