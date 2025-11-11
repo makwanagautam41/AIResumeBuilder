@@ -1,15 +1,9 @@
-﻿using CrystalDecisions.CrystalReports.Engine;
-using CrystalDecisions.Shared;
-using CrystalDecisions.Web;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 
 namespace airesumebuilder
@@ -19,14 +13,12 @@ namespace airesumebuilder
         string connectionString = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
         SqlConnection con;
         SqlCommand cmd;
+        DataAdapter da;
+        DataSet ds;
         int userId = 0;
         int planId = 0;
         string cycle = "";
         string sessionId = "";
-
-        private CrystalDecisions.CrystalReports.Engine.ReportDocument cr = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
-
-        static string Crypath = "";
 
 
         protected void Page_Load(object sender, EventArgs e)

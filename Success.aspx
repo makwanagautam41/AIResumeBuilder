@@ -49,7 +49,11 @@
                 </a>
             </div>
 
-            
+        <div class="mt-6 border-t pt-4">
+            <CR:CrystalReportViewer ID="crystalReportViewer1" runat="server" 
+                AutoDataBind="true" HasExportButton="true" HasPrintButton="true"
+                ToolPanelView="None" BestFitPage="True" />
+        </div>
         </div>
     </form>
 </body>

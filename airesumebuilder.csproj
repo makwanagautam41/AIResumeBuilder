@@ -152,6 +152,7 @@
     <Content Include="css\resume-style.css" />
     <Content Include="css\style.css" />
     <Content Include="EditProfile.aspx" />
+    <Content Include="Gen-Headshot.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="Index.aspx" />
     <Content Include="Login.aspx" />
@@ -201,6 +202,13 @@
       <DependentUpon>EditProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Gemini_Class.cs" />
+    <Compile Include="Gen-Headshot.aspx.cs">
+      <DependentUpon>Gen-Headshot.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gen-Headshot.aspx.designer.cs">
+      <DependentUpon>Gen-Headshot.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
